@@ -1,0 +1,53 @@
+\documentclass[sigconf,natbib=false]{acmart}
+
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+% https://tex.stackexchange.com/questions/346292/how-to-remove-conference-information-from-the-acm-2017-sigconf-template
+
+%drt24 hacks
+% Letter paper
+\setlength{\paperheight}{11in}
+\setlength{\paperwidth}{8.5in}
+
+% Hack to try to make acmart work with biblatex: https://tex.stackexchange.com/questions/37076/is-it-possible-to-load-biblatex-with-a-class-that-has-already-loaded-natbib
+\let\citename\relax
+\RequirePackage[abbreviate=true, dateabbrev=true, isbn=true, doi=true, urldate=comp, url=true, maxbibnames=9, backref=false, backend=biber, style=ACM-Reference-Format, language=american]{biblatex}
+
+\addbibresource{mybib.bib}
+\renewcommand{\bibfont}{\Small}
+
+\usepackage{booktabs} % For formal tables
+
+% Copyright
+\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+\begin{document}
+\title{Interactive Machine Learning for Visualization}
+\author{Viet Minh Vu}
+\affiliation{\institution{Universit\'e de Namur - Faculty of Computer Science}} %  - PReCISE
+\email{vuvietminh@unamur.be}
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{V. M. Vu}
+
+\begin{abstract}
+Abstract.
+\end{abstract}
+
+\keywords{Machine Learning, Visualization, User Interaction}
+
+\maketitle
+
+\input{samplebody-conf}
+
+\printbibliography
+
+\end{document}
