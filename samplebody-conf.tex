@@ -1,44 +1,59 @@
 \section{Introduction to Visualization problem in Machine Learning}
 
-+ Intro intelligent system that can learn from data.
-
 Our lives are getting better and better thanks to the intelligent systems.
 A computer vision system for analyzing medical images can support the doctors to make the diagnosis faster and more accurate.
 A smart home equipped with voice controlled devices is made possible due to the innovation in voice recognition and human language understanding system.
 They are some of numerous examples of learning system, the system can learn and improve itself from data, which can be million of medical images, voice records or texts in many languages.
 
-+ 2 main types of learning algorithms.
 
-+ Data is complex, high dimensional.
+% + 2 main types of learning algorithms.
 
-+ The need of visualization.
+% + Data is complex, high dimensional.
 
-+ The core algorithm to do viz is DR
+% + The need of visualization.
 
-+ Intro our work: interactive DR for Viz
+% + The core algorithm to do viz is DR
+
+% + Intro our work: interactive DR for Viz
 
 \section{The Need of Human-in-the-loop}
 
-+ Algo can make mistakes.
+% + Algo can make mistakes.
 
-+ Why human can help.
+% + Why human can help.
 
-+ How to integrate human knowledge
+% + How to integrate human knowledge
 
-+ State of the art human interaction method.
+% + State of the art human interaction method.
 
 \section{Integration of User Interactions into Visualization, the Showcases}
 
-+ Scenario that human can help in visualization
+% + Scenario that human can help in visualization
 
-+ Choose some (3) examples (very attractive methods)
+% + Choose some (3) examples (very attractive methods)
 
 \section{Works in Progress and Perspectives}
 
-+ Goal of our current works
+% + Goal of our current works
+Our current work is to integrate the user interaction into a dimensionaliy reduction method to steer the visualization.
+In one direction, we let the user to modify the visualization result by moving the points in the scatter plots.
+In other direction, TODO intro constraint-scores.
 
-+ Interactive with t-SNE and PPCA
+By allowing the users to interact directly with the scatter plot,
+we can translate their cognitive feedbacks in form of moving points into the constraints for the optimization algorithm
+in order to produce a new visualization that respects well their requirements.
+In the first experiment, we work with \emph{t-Distributed Stochastic Neighbor Embedding} (t-SNE), a neighborhood preserving DR technique.
+Intiutively, the similar data points in high dimensional space will be places close togther in low dimensional space and vice versa.
+The main advantage of t-SNE is to preserve the global information like the cluster structure and the local information like the neighborhood between data points.
+However the visualization result is not always perfect, e.g. points in the same semantic class are placed in different groups or in points of different semantic classes are places in the same group.
+Our interaction method allows user to divide up a group or to merge some groups together.
+The system is guided by the feedbacks in the form of the moving points.
+When the points are moved, thier neighbors have a tendency to follow. In that way, they can joint together or separate to create new groups.
 
-+ User-steering viz with constraints.
+\emph{Probabilistic Principal Component Analysis} (PPCA) is studied in our experiment.
 
-+ Perspective in the future: multi-aspect
+% + Interactive with t-SNE and PPCA
+
+% + User-steering viz with constraints.
+
+% + Perspective in the future: multi-aspect
