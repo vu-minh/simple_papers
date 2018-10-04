@@ -35,16 +35,16 @@ They are some of numerous examples of learning system, the system can learn and 
 \section{Works in Progress and Perspective}
 
 % + Goal of our current works
-Our current work is to integrate the user interaction into a dimensionaliy reduction method to steer the visualization.
+Our current work is to integrate the user interaction into a dimensionality reduction method to steer the visualization.
 In one direction, we let the users directly modify the visualization result by moving the points in the scatter plots.
 From these moved points which play a role as the guides for the DR algorithm, a new visualization will be produced.
 In other direction, we let user define their requirements about the visualization they need and automatically find a visualization that well respects these constraints.
 
 % + Interactive with t-SNE and PPCA
-In the first approach, by allowing the users to interact directly with the scatter plot, we can translate their cognitive feedbacks in form of moving points into the constraints for the optimization algorithm.
+In the first approach, by allowing the users to interact directly with the scatter plot, we can translate their cognitive feedback in form of moving points into the constraints for the optimization algorithm.
 As a result with \emph{t-Distributed Stochastic Neighbor Embedding} (t-SNE), a neighborhood preserving DR technique, the user can easily divide up a group or merge some groups in the visualization.
 When the points are moved, their neighbors have a tendency to follow so they can joint together or separate to create new groups.
-Another result with \emph{Probabilistic Principal Component Analysis} (PPCA), a global linear DR method, shows that the visualization is rotated in the same direction with the moved points to preserve the whole global structure of the visualization. That means the user can mannually control the rotation of the visualization to find the useful meaning of the two coordinate axes in the scatter plot.
+Another result with \emph{Probabilistic Principal Component Analysis} (PPCA), a global linear DR method, shows that the visualization is rotated in the same direction with the moved points to preserve the whole global structure of the visualization. That means the user can manually control the rotation of the visualization to find the useful meaning of two coordinate axes in the scatter plot.
 
 % + User-steering viz with constraints.
 In the second approach, we propose a visualization that matches the predefined requirements of user.
@@ -54,9 +54,9 @@ These constraints encode which points should be places close together or far apa
 Our algorithm translates these requirements into a \emph{constraint-preserving score} which is used as a criterion to choose the best visualization.
 
 % + Perspective in the future: multi-aspect
-However, the real world datasets are much complicated not only in term of the number of dimensions or datapoints but also in term of how they are interpreted.
-The visualization for a dataset is thus not unique. Different people under different view points can understand the dataset in different way and they expecte to see different visualizations.
+However, the real world datasets are much complicated not only in term of the number of dimensions or data points but also in term of how they are interpreted.
+The visualization for a dataset is thus not unique. Different people under different view points can understand the dataset in different way and they expect to see different visualizations.
 For example, with the movie reviews dataset containing the comments of users about movies (in human-readable text), a common visualization can highlight the groups of positive, negative or neutral comments.
-Although this is a good way to discover the partent in the text, the user still wants to discover more semantic patterns in the comments like emotions (funny, amusing or sad movies), movie types (sci-fi, comedy, drama, super-hero etc.)
+Although this is a good way to discover the pattern in the text, the user still wants to discover more semantic patterns in the comments like emotions (funny, amusing or sad movies), movie types (sci-fi, comedy, drama, super-hero etc.)
 Our perspective for the future work is to develop an \emph{interactive multi-aspect visualization} technique, in which the algorithm is expected to uncover all the hidden semantic aspects in the dataset.
 This technique is also required to understand the user's interactions to show an appropriate visualization corresponding to the desired semantic aspect that the user is looking for.
