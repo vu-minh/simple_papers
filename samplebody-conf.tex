@@ -9,8 +9,8 @@ They are some of numerous examples of learning system, the system can learn and 
 % + Data is complex, high dimensional and the need of visualization.
 These data are generally complex with large numbers of features, attributes or characteristics.
 The datasets are sometimes tied to a particular domain, thus analyzing and understanding them is a crucial task.
-Representation learning [CITE] deals with the problem of representing data in form of numerical features used by the machine learning algorithms, but these representations are not understandable for human.
-In contrast, visualization technique provides visual representations that summary the characteristics of the data to help people understand and carry out the analyzing task more effectively [CITE].
+Representation learning~\cite{bengio2013representation} deals with the problem of representing data in form of numerical features used by the machine learning algorithms, but these representations are not understandable for human.
+In contrast, visualization technique provides visual representations that summary the characteristics of the data to help people understand and carry out the analyzing task more effectively~\cite{munzner2014visualization}.
 By using the machine learning algorithm, more specific, \emph{the dimensionality reduction} (DR) technique, people can access a large amount of data for visually finding the interesting patterns.
 
 % + The core algorithm to do viz is DR
@@ -22,7 +22,7 @@ In addition, the visualization result is not always perfect since the algorithm 
 The main challenge in our research is how the machine learning algorithm can learn from feedback of the users' interactions to reveal their intend and produce the visualization that well responds to their needs.
 
 \section{The Need of Human-in-the-loop}
-A structured literature analysis about the visual interaction with dimensionality reduction by Sacha et. al. [CITE] and the methods therein are highly recommended to understand the interactive process in visual analysis and visualization.
+A structured literature analysis about the visual interaction with dimensionality reduction by Sacha et. al.~\cite{Sacha2017Interaction} and the methods therein are highly recommended to understand the interactive process in visual analysis and visualization.
 
 
 % + Algo can make mistakes.
@@ -52,9 +52,9 @@ In other direction, we let user define their requirements about the visualizatio
 
 % + Interactive with t-SNE and PPCA
 In the first approach, by allowing the users to interact directly with the scatter plot, we can translate their cognitive feedback in form of moving points into the constraints for the optimization algorithm.
-As a result with \emph{t-Distributed Stochastic Neighbor Embedding} (t-SNE), a neighborhood preserving DR technique, the user can easily divide up a group or merge some groups in the visualization.
+As a result with \emph{t-Distributed Stochastic Neighbor Embedding}~\cite{maaten2008tsne} (t-SNE), a neighborhood preserving DR technique, the user can easily divide up a group or merge some groups in the visualization.
 When the points are moved, their neighbors have a tendency to follow so they can joint together or separate to create new groups.
-Another result with \emph{Probabilistic Principal Component Analysis} (PPCA), a global linear DR method, shows that the visualization is rotated in the same direction with the moved points to preserve the whole global structure of the visualization. That means the user can manually control the rotation of the visualization to find the useful meaning of two coordinate axes in the scatter plot.
+Another result with \emph{Probabilistic Principal Component Analysis}~\cite{tipping1999ppca} (PPCA), a global linear DR method, shows that the visualization is rotated in the same direction with the moved points to preserve the whole global structure of the visualization. That means the user can manually control the rotation of the visualization to find the useful meaning of two coordinate axes in the scatter plot.
 
 % + User-steering viz with constraints.
 In the second approach, we propose a visualization that matches the predefined requirements of user.
