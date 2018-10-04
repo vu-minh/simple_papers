@@ -36,24 +36,27 @@ They are some of numerous examples of learning system, the system can learn and 
 
 % + Goal of our current works
 Our current work is to integrate the user interaction into a dimensionaliy reduction method to steer the visualization.
-In one direction, we let the user to modify the visualization result by moving the points in the scatter plots.
-In other direction, TODO intro constraint-scores.
-
-By allowing the users to interact directly with the scatter plot,
-we can translate their cognitive feedbacks in form of moving points into the constraints for the optimization algorithm
-in order to produce a new visualization that respects well their requirements.
-In the first experiment, we work with \emph{t-Distributed Stochastic Neighbor Embedding} (t-SNE), a neighborhood preserving DR technique.
-Intiutively, the similar data points in high dimensional space will be places close togther in low dimensional space and vice versa.
-The main advantage of t-SNE is to preserve the global information like the cluster structure and the local information like the neighborhood between data points.
-However the visualization result is not always perfect, e.g. points in the same semantic class are placed in different groups or in points of different semantic classes are places in the same group.
-Our interaction method allows user to divide up a group or to merge some groups together.
-The system is guided by the feedbacks in the form of the moving points.
-When the points are moved, thier neighbors have a tendency to follow. In that way, they can joint together or separate to create new groups.
-
-\emph{Probabilistic Principal Component Analysis} (PPCA) is studied in our experiment.
+In one direction, we let the users directly modify the visualization result by moving the points in the scatter plots.
+From these moved points which play a role as the guides for the DR algorithm, a new visualization will be produced.
+In other direction, we let user define their requirements about the visualization they need and automatically find a visualization that well respects these constraints.
 
 % + Interactive with t-SNE and PPCA
+In the first approach, by allowing the users to interact directly with the scatter plot, we can translate their cognitive feedbacks in form of moving points into the constraints for the optimization algorithm.
+As a result with \emph{t-Distributed Stochastic Neighbor Embedding} (t-SNE), a neighborhood preserving DR technique, the user can easily divide up a group or merge some groups in the visualization.
+When the points are moved, their neighbors have a tendency to follow so they can joint together or separate to create new groups.
+Another result with \emph{Probabilistic Principal Component Analysis} (PPCA), a global linear DR method, shows that the visualization is rotated in the same direction with the moved points to preserve the whole global structure of the visualization. That means the user can mannually control the rotation of the visualization to find the useful meaning of the two coordinate axes in the scatter plot.
 
 % + User-steering viz with constraints.
+In the second approach, we propose a visualization that matches the predefined requirements of user.
+In this way, we free user from a tedious process of choosing the numeric parameters for a visualization technique (t-SNE in our case).
+Instead, the user defines his requirements about the visualization in term of pairwise constraints between examples.
+These constraints encode which points should be places close together or far apart in the embedded space.
+Our algorithm translates these requirements into a \emph{constraint-preserving score} which is used as a criterion to choose the best visualization.
 
 % + Perspective in the future: multi-aspect
+However, the real world datasets are much complicated not only in term of the number of dimensions or datapoints but also in term of how they are interpreted.
+The visualization for a dataset is thus not unique. Different people under different view points can understand the dataset in different way and they expecte to see different visualizations.
+For example, with the movie reviews dataset containing the comments of users about movies (in human-readable text), a common visualization can highlight the groups of positive, negative or neutral comments.
+Although this is a good way to discover the partent in the text, the user still wants to discover more semantic patterns in the comments like emotions (funny, amusing or sad movies), movie types (sci-fi, comedy, drama, super-hero etc.)
+Our perspective for the future work is to develop an \emph{interactive multi-aspect visualization} technique, in which the algorithm is expected to uncover all the hidden semantic aspects in the dataset.
+This technique is also required to understand the user's interactions to show an appropriate visualization corresponding to the desired semantic aspect that the user is looking for.
