@@ -21,25 +21,16 @@ Moreover, pattern discovering in the visualization is an interactive process in 
 In addition, the visualization result is not always perfect since the algorithm can make mistakes or the visualization does not satisfy the user's viewpoint. To deal with this issue, the integration of human's feedback is necessary.
 The main challenge in our research is how the machine learning algorithm can learn from feedback of the users' interactions to reveal their intend and produce the visualization that well responds to their needs.
 
+
 \section{The Need of Human-in-the-loop}
 A structured literature analysis about the visual interaction with dimensionality reduction by Sacha et. al.~\cite{Sacha2017Interaction} and the methods therein are highly recommended to understand the interactive process in visual analysis and visualization.
-
-
-% + Algo can make mistakes.
-
-% + Why human can help.
-
-% + How to integrate human knowledge
-
-% + State of the art human interaction method.
-
-% \section{Integration of User Interactions into Visualization, the Showcases}
-
-% + Scenario that human can help in visualization
-
-% + Choose some (3) examples (very attractive methods)
+When the users have had the analysis questions, they simply choose the appropriate DR algorithms to produce the expected visualizations.
+But when the analysis problem is complex and they have not had these questions beforehand, interacting with the visualizations is a good idea to discover the data.
+The prior knowledge of domain expert or the interaction of end-user can be used to guide the DR algorithms as shown in some following intuitive examples.
+The \emph{forward and backward projection} technique~\cite{cavallo2017FWBW} allow user to move points in the scatter plot to see how the feature values of the corresponding data point in high dimensional space are changed. This help user to figure out which important features determine the position of point in the visualization.
 The work of Kim et. al. \cite{Kim2016InterAxis} shows an interactive visualization for the car dataset, in which the user can use the examples to guide the algorithm to construct the meaningful coordinate axes.
 More precise, they can place a 2-seaters car on the left, a 7-seaters SUV on the right, an electric car on the top and a gasoline car on the bottom. The algorithm will automatically place the other cars from left to right by the increase of size and from top to bottom by the fuel technologies.
+In summary, tight integration of machine learning algorithms, visualizations and user interactions is essential and that navigates our research direction.
 
 
 \section{Works in Progress and Perspective}
