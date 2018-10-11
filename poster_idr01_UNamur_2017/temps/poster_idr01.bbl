@@ -1,0 +1,274 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\sortlist[entry]{nty/global/}
+  \entry{cavallo2017FWBW}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CM}{%
+         family={Cavallo},
+         familyi={C\bibinitperiod},
+         given={Marco},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DC}{%
+         family={Demiralp},
+         familyi={D\bibinitperiod},
+         given={{\c{C}}a{\u{g}}atay},
+         giveni={{\c{C}}\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CM+1}
+    \strng{fullhash}{CMDC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{Exploring Dimensionality Reductions with Forward and Backward
+  Projections}
+    \field{journaltitle}{arXiv preprint arXiv:1707.04281}
+    \field{year}{2017}
+  \endentry
+
+  \entry{Kim2016InterAxis}{article}{}
+    \name{author}{4}{}{%
+      {{hash=KH}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Hannah},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=CJ}{%
+         family={Choo},
+         familyi={C\bibinitperiod},
+         given={Jaegul},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=PH}{%
+         family={Park},
+         familyi={P\bibinitperiod},
+         given={Haesun},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=EA}{%
+         family={Endert},
+         familyi={E\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KH+1}
+    \strng{fullhash}{KHCJPHEA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{pages}{131\bibrangedash 140}
+    \field{title}{InterAxis: Steering Scatterplot Axes via Observation-Level
+  Interaction}
+    \field{volume}{22}
+    \field{journaltitle}{IEEE Transactions on Visualization and Computer
+  Graphics}
+    \field{year}{2016}
+  \endentry
+
+  \entry{maaten2008tsne}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MLvd}{%
+         family={Maaten},
+         familyi={M\bibinitperiod},
+         given={Laurens van\bibnamedelima der},
+         giveni={L\bibinitperiod\bibinitdelim v\bibinitperiod\bibinitdelim
+  d\bibinitperiod},
+      }}%
+      {{hash=HG}{%
+         family={Hinton},
+         familyi={H\bibinitperiod},
+         given={Geoffrey},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MLvd+1}
+    \strng{fullhash}{MLvdHG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{number}{Nov}
+    \field{pages}{2579\bibrangedash 2605}
+    \field{title}{Visualizing data using t-SNE}
+    \field{volume}{9}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2008}
+  \endentry
+
+  \entry{sacha2014knowledge}{article}{}
+    \name{author}{6}{}{%
+      {{hash=SD}{%
+         family={Sacha},
+         familyi={S\bibinitperiod},
+         given={Dominik},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Stoffel},
+         familyi={S\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SF}{%
+         family={Stoffel},
+         familyi={S\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=KBC}{%
+         family={Kwon},
+         familyi={K\bibinitperiod},
+         given={Bum\bibnamedelima Chul},
+         giveni={B\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+      {{hash=EG}{%
+         family={Ellis},
+         familyi={E\bibinitperiod},
+         given={Geoffrey},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=KDA}{%
+         family={Keim},
+         familyi={K\bibinitperiod},
+         given={Daniel\bibnamedelima A},
+         giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{SD+1}
+    \strng{fullhash}{SDSASFKBCEGKDA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{number}{12}
+    \field{pages}{1604\bibrangedash 1613}
+    \field{title}{Knowledge generation model for visual analytics}
+    \field{volume}{20}
+    \field{journaltitle}{IEEE transactions on visualization and computer
+  graphics}
+    \field{year}{2014}
+  \endentry
+
+  \entry{Sacha2017Interaction}{article}{}
+    \name{author}{8}{}{%
+      {{hash=SD}{%
+         family={Sacha},
+         familyi={S\bibinitperiod},
+         given={Dominik},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=ZL}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Leishi},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Sedlmair},
+         familyi={S\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LJA}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={John\bibnamedelima Aldo},
+         giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=PJ}{%
+         family={Peltonen},
+         familyi={P\bibinitperiod},
+         given={Jaakko},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=WD}{%
+         family={Weiskopf},
+         familyi={W\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=NSC}{%
+         family={North},
+         familyi={N\bibinitperiod},
+         given={Stephen\bibnamedelima C.},
+         giveni={S\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+      {{hash=KDA}{%
+         family={Keim},
+         familyi={K\bibinitperiod},
+         given={Daniel\bibnamedelima A.},
+         giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SD+1}
+    \strng{fullhash}{SDZLSMLJAPJWDNSCKDA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{pages}{241\bibrangedash 250}
+    \field{title}{Visual Interaction with Dimensionality Reduction: A
+  Structured Literature Analysis}
+    \field{volume}{23}
+    \field{journaltitle}{IEEE Transactions on Visualization and Computer
+  Graphics}
+    \field{year}{2017}
+  \endentry
+
+  \entry{van2012ste}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=VDML}{%
+         family={Van Der\bibnamedelima Maaten},
+         familyi={V\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
+         given={Laurens},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=WK}{%
+         family={Weinberger},
+         familyi={W\bibinitperiod},
+         given={Kilian},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{VDML+1}
+    \strng{fullhash}{VDMLWK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{booktitle}{Machine Learning for Signal Processing (MLSP), 2012 IEEE
+  International Workshop on}
+    \field{pages}{1\bibrangedash 6}
+    \field{title}{Stochastic triplet embedding}
+    \field{year}{2012}
+  \endentry
+\endsortlist
+\endinput
