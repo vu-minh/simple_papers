@@ -9,12 +9,18 @@
 \usepackage{multicol}
 \usepackage{sectsty}
 
-
 \usepackage{pgfbaselayers}
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
 
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\textcolor{blue}{\ding{51}}}%
+\newcommand{\xmark}{\textcolor{red}{\ding{55}}}%
+\newcommand{\pointer}{\scalebox{2}{\ding{43}}}%
+% \usepackage{tikz}
+% \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
@@ -45,7 +51,7 @@
 \contactInfo{%
 \begin{tabular}{c}
   Viet Minh Vu, Adrien~Bibal and Beno\^it~Fr\'enay \\
-  \faEnvelopeO\ : \{vuvietminh, adrien.bibal, benoit.frenay\} @unamur.be \\
+  \faEnvelopeO\ : \{vuvietminh, adrien.bibal, benoit.frenay\}@unamur.be \\
 %   \faGlobe\ : staff.info.unamur.be/jmj
 \end{tabular}}
 
@@ -105,7 +111,7 @@
   % Eye Catcher
   {\hbox{} } %\includegraphics[height=7em]{images/nadi-red.png}} 
   % Title
-  {\bf\textsc{Tuning of Visualization Algorithms\\ with User Constraints for $t$-SNE}\vspace{0.5em}}
+  {\bf\textsc{Tuning of Visualization Algorithms\\*[0.3em] with User Constraints for $t$-SNE}\vspace{0.5em}}
   % Authors%   Viet~Minh~Vu,  Adrien~Bibal, Beno\^it~Fr\'enay
   {\textsc{Viet Minh Vu, Adrien~Bibal,  Beno\^it~Fr\'enay} } % \\ {Universit\'e de Namur - Faculty of Computer Science}
   % University logo
@@ -127,13 +133,13 @@
     \begin{tabular}{p{3.cm} p{11.cm}}
         \includegraphics[height=8em]{images/mnist_raw200.pdf}&
         \includegraphics[height=8em]{images/MNIST-SMALL_examples.pdf}\\
-        Goal: Visualize the \scriptsize{\textbf{high dimensional} data}&
+        Goal: Visualize the \scriptsize{\textbf{high~dimensional}~data}&
         t-SNE is sensitive to the \emph{perplexity} parameter, which is \textbf{important} but very \textbf{hard to understand and to tune}.\\
     \end{tabular}
 \end{minipage}
 \begin{minipage}{0.33\linewidth}
     \begin{center} \Large{\textbf{Proposed Solution}}\end{center}
-    $\quad$Use \textbf{feedback} of user to steer the visualization.
+    $\;$Use the users' \textbf{feedback} to \textcolor{blue}{steer the visualization}.
     
     \begin{itemize}
         \compresslist{
@@ -151,17 +157,19 @@
     \section*{\large{What are expressed by user (in high dim.)}}
     \begin{center}
     \begin{tabular}{c}
-        Two \textcolor{blue}{similar} examples $\rightarrow$ \textcolor{blue}{\textbf{Must link}}\\
-        Two \textcolor{red}{dissimilar} examples $\rightarrow$ \textcolor{red}{\textbf{Cannot link}} \\
-        \includegraphics[height=15em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}
+        Two \textcolor{blue}{similar} examples $\rightarrow$ \textcolor{blue}{\textbf{Must link}}.\\
+        Two \textcolor{red}{dissimilar} examples $\rightarrow$ \textcolor{red}{\textbf{Cannot link}}. \\
+        \includegraphics[height=12.5em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}\\
+        \tiny{Figure: The interface for collecting the users' feedback.}
     \end{tabular}
     \end{center}
     \section*{\large{What are translated to the algorithm (in low dim.)}}
     \begin{center}
     \begin{tabular}{c}
-        Points connected by a \textcolor{blue}{\textbf{Must link}} must stay close together\\
-        Points connected by a \textcolor{red}{\textbf{Cannot link}} must stay far apart\\
-        \includegraphics[height=15em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}
+        Points connected by a \textcolor{blue}{\textbf{Must link}} $\rightarrow$ must stay \textbf{close together}.\\
+        Points connected by a \textcolor{red}{\textbf{Cannot link}} $\rightarrow$ must stay \textbf{far apart}.\\
+        \includegraphics[height=12.5em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}\\
+        \tiny{Figure: The user constraints in the visualization (COIL20 dataset).}
     \end{tabular}
     \end{center}
 \end{multicols}
@@ -169,50 +177,59 @@
 
 % --------------------------------------------------------------------------- %
 \headerbox{Constraint-Preserving Scores \textcolor{white}{[B]}}{name=constraint_score,column=0,span=2,below=constraint_gui}{
-\begin{multicols}{2}
-    \section*{}
+\noindent
+\begin{minipage}{0.48\linewidth}
     \begin{itemize}
-        % \compresslist
+        \compresslist
         \item Consider the points in the visualization (low dim.)
         \item $q_{ij} = $ probability of $i$ and $j$ being neighbors.
-        \item $S_{\mathcal{M}} = \frac{1}{|\mathcal{M}|} \sum_{(i,j) \in \mathcal{M}} \log q_{ij}.$
-        \item $S_{\mathcal{C}} = -\frac{1}{|\mathcal{C}|} \sum_{(i,j) \in \mathcal{C}} \log q_{ij}.$
-        \item $S_{\mathcal{M}+\mathcal{C}} = S_{\mathcal{M}} + S_{\mathcal{C}}.$
     \end{itemize}
-
-    \section*{}
+    \begin{itemize}
+        \item \textcolor{blue}{$S_{\mathcal{M}} = \frac{1}{|\mathcal{M}|} \sum_{(i,j) \in \mathcal{M}} \log q_{ij}.$}
+        \item \textcolor{red}{$S_{\mathcal{C}} = -\frac{1}{|\mathcal{C}|} \sum_{(i,j) \in \mathcal{C}} \log q_{ij}.$}
+        \item \textcolor{BurntOrange}{$S_{\mathcal{M}+\mathcal{C}} = S_{\mathcal{M}} + S_{\mathcal{C}}.$}
+    \end{itemize}
+\end{minipage}
+\begin{minipage}{0.48\linewidth}
     \begin{center}
     \begin{tabular}{c}
-        \includegraphics[height=11em]{poster_NADI_2018/images/s_scores_50.pdf}
+        \includegraphics[height=11em]{poster_NADI_2018/images/s_scores_50.pdf}\\
+        \tiny{Figure :Constraint-preserving scores}\\
+        \tiny{with 50 constraints for MNIST dataset.}
     \end{tabular}
     \end{center}
+\end{minipage}
 
-\end{multicols}
-
+\noindent
+\pointer \quad \fbox{Can easily find the perplexity that maximizes \textcolor{blue}{$S_{\mathcal{M}}$}, \textcolor{red}{$S_{\mathcal{C}}$} or \textcolor{BurntOrange}{$S_{\mathcal{M}+\mathcal{C}}$}.}
 }
 
 % --------------------------------------------------------------------------- %
 \headerbox{Quality Metrics\textcolor{white}{[C]}}{name=metrics,column=2,span=2,below=constraint_gui}{
-
-\begin{multicols}{2}
-    \section*{}
+\noindent
+\begin{minipage}{0.48\linewidth}
     \begin{itemize}
         \compresslist
-        \item CC: Pearson corr. coeff.
-        \item NMS: Stress of pairwise distance orders comparison
-        \item CCA: Stress with accent put on low dim.
-        \item NLM: Stress with accent put on high dim.
-        \item AUC$_{log}$RNX: Neighbors-preserving in low dim.
+        \item \textbf{CC}: Pearson corr. coeff.
+        \item \textbf{NMS}: Stress of pairwise distance orders comparison
+        \item \textbf{CCA}: Stress with accent put on low dim.
+        \item \textbf{NLM}: Stress with accent put on high dim.
+        \item \textcolor{NavyBlue}{\textbf{AUC$_{log}$RNX}}: Neighbors-preserving in low dim.
     \end{itemize}
-        
-    \section*{}
+\end{minipage}
+\begin{minipage}{0.48\linewidth}
     \begin{center}
     \begin{tabular}{c}
-        \includegraphics[height=10em]{poster_NADI_2018/images/sall_auc_50.pdf}
+        \includegraphics[height=10em]{poster_NADI_2018/images/sall_auc_50.pdf}\\
+        \tiny{Figure: Compare \textcolor{BurntOrange}{$S_{\mathcal{M}+\mathcal{C}}$} and \textcolor{NavyBlue}{\textbf{AUC$_{log}$RNX}}}\\
+        \tiny{for six datasets.}
     \end{tabular}
     \end{center}
-\end{multicols}
+\end{minipage}
 
+\vspace{1.em}
+\noindent
+\pointer \quad \fbox{Our constraint scores agree with the quality metrics.}
 }
 
 % --------------------------------------------------------------------------- %
@@ -227,6 +244,16 @@
 
 % --------------------------------------------------------------------------- %
 \headerbox{Conclusion}{name=conclusion,column=3,span=1,below=constraint_score}{
+\noindent
+\cmark \quad Consider \emph{user knowledge} under the form of constraints to find the most suitable visualization.
+
+\vspace{0.75em}
+\noindent
+\cmark \quad Make complex visualization technique ($t$-SNE) \emph{accessible} to users by freeing them from the tedious task of selecting the hyper-parameter.
+
+\vspace{1.25em}
+\noindent
+\xmark \quad \emph{Heavy computation} due to the pre-calculation of all the embedding and the greedy approach for searching the optimal perplexity.
 }
 
 \end{poster}
