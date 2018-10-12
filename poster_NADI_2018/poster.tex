@@ -119,51 +119,102 @@
 \sectionfont{\centering}
 
 % --------------------------------------------------------------------------- %
-\headerbox{Difficulty in choosing a good parameter for a visualization algorithm}{name=intro,column=0,row=0,span=4}{
+\headerbox{Difficulty in choosing a good parameter for a visualization algorithm (t-SNE)}{name=intro,column=0,row=0,span=4}{
 
-\noindent
-\begin{minipage}{0.25\linewidth}   
+\begin{minipage}{0.63\linewidth}   
+    \begin{center} \Large{\textbf{Problematic and Motivation}} \end{center}
+    
+    \begin{tabular}{p{3.cm} p{11.cm}}
+        \includegraphics[height=8em]{images/mnist_raw200.pdf}&
+        \includegraphics[height=8em]{images/MNIST-SMALL_examples.pdf}\\
+        Goal: Visualize the \scriptsize{\textbf{high dimensional} data}&
+        t-SNE is sensitive to the \emph{perplexity} parameter, which is \textbf{important} but very \textbf{hard to understand and to tune}.\\
+    \end{tabular}
+\end{minipage}
+\begin{minipage}{0.33\linewidth}
+    \begin{center} \Large{\textbf{Proposed Solution}}\end{center}
+    $\quad$Use \textbf{feedback} of user to steer the visualization.
+    
     \begin{itemize}
-    \compresslist
-        \item hard1
-        \item hard2
+        \compresslist{
+            \item Let users define their requirements in form of \textbf{pairwise constraints}\textcolor{blue}{[A]} between examples.
+            \item The \emph{perplexity} is automatically chosen based on the user's \textbf{constraint scores}\textcolor{blue}{[B]}.
+            \item Evaluate the proposed visualization by quantitatively comparing with the state-of-the-art \textbf{quality metrics}\textcolor{blue}{[C]}.
+        }
     \end{itemize}
 \end{minipage}
-\hfill
+}
 
-\begin{minipage}{0.75\linewidth}
-    \begin{flushright}
-    \begin{tabular}{cccc}
-        \includegraphics[height=6em]{images/mnist_raw200.pdf}} &
-        \includegraphics[height=6em]{images/}
+% --------------------------------------------------------------------------- %
+\headerbox{User pairwise constraints \textcolor{white}{[A]}}{name=constraint_gui,column=0,span=4,below=intro}{
+\begin{center}
+\begin{tabular}{c}
+    \includegraphics[height=16em]{poster_NADI_2018/images/app_guis_annotated.pdf}
+\end{tabular}
+\end{center}
+}
+
+% --------------------------------------------------------------------------- %
+\headerbox{Constraint-Preserving Scores \textcolor{white}{[B]}}{name=constraint_score,column=0,span=2,below=constraint_gui}{
+
+\begin{multicols}{2}
+    \section*{}
+    \begin{itemize}
+        % \compresslist
+        \item Consider the points in the visualization (low dim.)
+        \item $q_{ij} = $ probability of $i$ and $j$ being neighbors.
+        \item $S_{\mathcal{M}} = \frac{1}{|\mathcal{M}|} \sum_{(i,j) \in \mathcal{M}} \log q_{ij}.$
+        \item $S_{\mathcal{C}} = -\frac{1}{|\mathcal{C}|} \sum_{(i,j) \in \mathcal{C}} \log q_{ij}.$
+        \item $S_{\mathcal{M}+\mathcal{C}} = S_{\mathcal{M}} + S_{\mathcal{C}}.$
+    \end{itemize}
+
+    \section*{}
+    \begin{center}
+    \begin{tabular}{c}
+        \includegraphics[height=11em]{poster_NADI_2018/images/s_scores_50.pdf}
     \end{tabular}
-    \end{flushright}
-\end{minipage}
-}
+    \end{center}
 
-% --------------------------------------------------------------------------- %
-\headerbox{User pairwise constraints}{name=constraint_gui,column=0,span=4,below=intro}{
-figure: how to choose the constraints
-}
-
-% --------------------------------------------------------------------------- %
-\headerbox{Constraint-Preserving Scores}{name=constraint_score,column=0,span=2,below=constraint_gui}{
-math and plot to explain ML, MC, ML + MC
-}
-
-% --------------------------------------------------------------------------- %
-\headerbox{Quality Metrics}{name=metrics,column=2,span=2,below=constraint_gui}{
-table of 6 metrics, compaire ML + MC with AUC
-}
-
-% --------------------------------------------------------------------------- %
-\headerbox{Meta-plot}{name=metaplot,column=0,span=3,below=constraint_score}{
+\end{multicols}
 
 }
 
+% --------------------------------------------------------------------------- %
+\headerbox{Quality Metrics\textcolor{white}{[C]}}{name=metrics,column=2,span=2,below=constraint_gui}{
+
+\begin{multicols}{2}
+    \section*{}
+    \begin{itemize}
+        \compresslist
+        \item CC: Pearson corr. coeff.
+        \item NMS: Stress of pairwise distance orders comparison
+        \item CCA: Stress with accent put on low dim.
+        \item NLM: Stress with accent put on high dim.
+        \item AUC$_{log}$RNX: Neighbors-preserving in low dim.
+    \end{itemize}
+        
+    \section*{}
+    \begin{center}
+    \begin{tabular}{c}
+        \includegraphics[height=10em]{poster_NADI_2018/images/sall_auc_50.pdf}
+    \end{tabular}
+    \end{center}
+\end{multicols}
+
+}
 
 % --------------------------------------------------------------------------- %
-\headerbox{Conclusion}{name=conclusion,column=3,span=1,below=metrics}{
+\headerbox{All the visualizations in one place: Meta-plot}{name=metaplot,column=0,span=3,below=constraint_score}{
+\begin{center}
+\begin{tabular}{c}
+    \includegraphics[height=18em]{poster_NADI_2018/images/COIL20_meta.pdf}
+\end{tabular}
+\end{center}
+}
+
+
+% --------------------------------------------------------------------------- %
+\headerbox{Conclusion}{name=conclusion,column=3,span=1,below=constraint_score}{
 }
 
 \end{poster}
