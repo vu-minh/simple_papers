@@ -147,16 +147,28 @@
 
 % --------------------------------------------------------------------------- %
 \headerbox{User pairwise constraints \textcolor{white}{[A]}}{name=constraint_gui,column=0,span=4,below=intro}{
-\begin{center}
-\begin{tabular}{c}
-    \includegraphics[height=16em]{poster_NADI_2018/images/constraints2_no_annotation.pdf}
-\end{tabular}
-\end{center}
+\begin{multicols}{2}
+    \section*{\large{What are expressed by user (in high dim.)}}
+    \begin{center}
+    \begin{tabular}{c}
+        Two \textcolor{blue}{similar} examples $\rightarrow$ \textcolor{blue}{\textbf{Must link}}\\
+        Two \textcolor{red}{dissimilar} examples $\rightarrow$ \textcolor{red}{\textbf{Cannot link}} \\
+        \includegraphics[height=15em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}
+    \end{tabular}
+    \end{center}
+    \section*{\large{What are translated to the algorithm (in low dim.)}}
+    \begin{center}
+    \begin{tabular}{c}
+        Points connected by a \textcolor{blue}{\textbf{Must link}} must stay close together\\
+        Points connected by a \textcolor{red}{\textbf{Cannot link}} must stay far apart\\
+        \includegraphics[height=15em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}
+    \end{tabular}
+    \end{center}
+\end{multicols}
 }
 
 % --------------------------------------------------------------------------- %
 \headerbox{Constraint-Preserving Scores \textcolor{white}{[B]}}{name=constraint_score,column=0,span=2,below=constraint_gui}{
-
 \begin{multicols}{2}
     \section*{}
     \begin{itemize}
@@ -207,7 +219,7 @@
 \headerbox{All the visualizations in one place: Meta-plot}{name=metaplot,column=0,span=3,below=constraint_score}{
 \begin{center}
 \begin{tabular}{c}
-    \includegraphics[height=18em]{poster_NADI_2018/images/COIL20_meta.pdf}
+    \includegraphics[height=16em]{poster_NADI_2018/images/COIL20_meta.pdf}
 \end{tabular}
 \end{center}
 }
