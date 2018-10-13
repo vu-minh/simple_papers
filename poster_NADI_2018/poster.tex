@@ -145,7 +145,7 @@
         \compresslist{
             \item Let users define their requirements in form of \textbf{pairwise constraints}\textcolor{blue}{[A]} between examples.
             \item The \emph{perplexity} is automatically chosen based on the user's \textbf{constraint scores}\textcolor{blue}{[B]}.
-            \item Evaluate the proposed visualization by quantitatively comparing with the state-of-the-art \textbf{quality metrics}\textcolor{blue}{[C]}.
+            \item Evaluate the proposed visualization in quantitative comparison with the state-of-the-art \textbf{quality metrics}\textcolor{blue}{[C]}.
         }
     \end{itemize}
 \end{minipage}
@@ -160,18 +160,17 @@
         Two \textcolor{blue}{similar} examples $\rightarrow$ \textcolor{blue}{\textbf{Must link}}.\\
         Two \textcolor{red}{dissimilar} examples $\rightarrow$ \textcolor{red}{\textbf{Cannot link}}. \\
         \includegraphics[height=12.5em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}\\
-        \tiny{Figure: The interface for collecting the users' feedback.}
+        \tiny{Figure: The interface for collecting users' feedback for image and tabular data.}
     \end{tabular}
     \end{center}
     \section*{\large{What are translated to the algorithm (in low dim.)}}
-    \noindent
     \begin{center}
     \begin{tabular}{c}
-        Points connected by a \textcolor{blue}{\textbf{Must link}} $\rightarrow$ must stay \textbf{close together}.\\
-        Points connected by a \textcolor{red}{\textbf{Cannot link}} $\rightarrow$ must stay \textbf{far apart}.\\
-        \includegraphics[height=12em]{poster_NADI_2018/images/example_constrains_COIL20_ML.pdf}
-        \includegraphics[height=12em]{poster_NADI_2018/images/example_constrains_COIL20_CL.pdf}\\
-        \tiny{Figure: The user constraints in the visualization (COIL20 dataset).}
+        Points connected by a \textcolor{blue}{\textbf{Must link}} (\textcolor{blue}{$\mathcal{M}$}) $\rightarrow$ must stay \textbf{close together}.\\
+        Points connected by a \textcolor{red}{\textbf{Cannot link}} (\textcolor{red}{$\mathcal{C}$}) $\rightarrow$ must stay \textbf{far apart}.\\
+        \includegraphics[height=12.5em]{poster_NADI_2018/images/example_constrains_COIL20_ML.pdf}
+        \includegraphics[height=12.5em]{poster_NADI_2018/images/example_constrains_COIL20_CL.pdf}\\
+        \tiny{Figure: The user constraints in the visualization of the COIL20 dataset.}
     \end{tabular}
     \end{center}
 \end{multicols}
@@ -207,7 +206,7 @@
 }
 
 % --------------------------------------------------------------------------- %
-\headerbox{Quality Metrics\textcolor{white}{[C]}}{name=metrics,column=2,span=2,below=constraint_gui}{
+\headerbox{Quality Metrics \textcolor{white}{[C]}}{name=metrics,column=2,span=2,below=constraint_gui}{
 \noindent
 \begin{minipage}{0.48\linewidth}
     \begin{itemize}
@@ -216,7 +215,7 @@
         \item \textbf{NMS}: Stress of pairwise distance orders comparison
         \item \textbf{CCA}: Stress with accent put on low dim.
         \item \textbf{NLM}: Stress with accent put on high dim.
-        \item \textcolor{NavyBlue}{\textbf{AUC$_{log}$RNX}}: Neighbors-preserving in low dim.
+        \item \textcolor{NavyBlue}{\textbf{AUC$_{log}$RNX}}: How neighbors in high dim. are preserved in low dim.
     \end{itemize}
 \end{minipage}
 \begin{minipage}{0.48\linewidth}
@@ -235,7 +234,7 @@
 }
 
 % --------------------------------------------------------------------------- %
-\headerbox{All the visualizations in one place: Meta-plot}{name=metaplot,column=0,span=3,below=constraint_score}{
+\headerbox{All visualizations in one place: Meta-plot}{name=metaplot,column=0,span=3,below=constraint_score}{
 \begin{center}
 \begin{tabular}{c}
     \includegraphics[height=16em]{poster_NADI_2018/images/COIL20_meta.pdf}
@@ -246,16 +245,18 @@
 
 % --------------------------------------------------------------------------- %
 \headerbox{Conclusion}{name=conclusion,column=3,span=1,below=constraint_score}{
+\vspace{0.5em}
 \noindent
 \cmark \quad Consider \emph{user knowledge} under the form of constraints to find the most suitable visualization.
 
-\vspace{0.75em}
+\vspace{1.25em}
 \noindent
 \cmark \quad Make complex visualization technique ($t$-SNE) \emph{accessible} to users by freeing them from the tedious task of selecting the hyper-parameter.
 
-\vspace{1.25em}
+\vspace{1.75em}
 \noindent
-\xmark \quad \emph{Heavy computation} due to the pre-calculation of all the embedding and the greedy approach for searching the optimal perplexity.
+\xmark \quad \emph{Heavy computation} due to the pre-calculation of many possible embeddings.
+% all the embeddings and the greedy approach for searching the optimal perplexity.
 }
 
 \end{poster}
