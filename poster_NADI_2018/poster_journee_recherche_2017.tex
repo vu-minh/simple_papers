@@ -22,6 +22,9 @@
 % \usepackage{tikz}
 % \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
+\usepackage[backend=bibtex,style=numeric,maxnames=1, minnames=1]{biblatex}
+\addbibresource{refs.bib}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
 
@@ -127,26 +130,10 @@
 \headerbox{Dimensionality Reduction (DR) methods in an Interactive Context}{name=interactiveDR,column=0,row=0,span=4}{
 
 \begin{minipage}{0.63\linewidth}   
-    \begin{center} \Large{\textbf{Problematic and Motivation}} \end{center}
-    
-    \begin{tabular}{p{3.cm} p{11.cm}}
-        \includegraphics[height=8em]{images/mnist_raw200.pdf}&
-        \includegraphics[height=8em]{images/MNIST-SMALL_examples.pdf}\\
-        Goal: Visualize the \scriptsize{\textbf{high~dimensional}~data}&
-        t-SNE is sensitive to the \emph{perplexity} parameter, which is \textbf{important} but very \textbf{hard to understand and to tune}.\\
-    \end{tabular}
+a
 \end{minipage}
 \begin{minipage}{0.33\linewidth}
-    \begin{center} \Large{\textbf{Proposed Solution}}\end{center}
-    $\;$Use the users' \textbf{feedback} to \textcolor{blue}{steer the visualization}.
-    
-    \begin{itemize}
-        \compresslist{
-            \item Let users define their requirements in form of \textbf{pairwise constraints}\textcolor{blue}{[A]} between examples.
-            \item The \emph{perplexity} is automatically chosen based on the user's \textbf{constraint scores}\textcolor{blue}{[B]}.
-            \item Evaluate the proposed visualization by quantitatively comparing with the state-of-the-art \textbf{quality metrics}\textcolor{blue}{[C]}.
-        }
-    \end{itemize}
+b
 \end{minipage}
 }
 
@@ -154,60 +141,20 @@
 \headerbox{Different approaches for integrating user constraints}{name=constraint,column=0,span=4,below=interactiveDR}{
 \begin{multicols}{2}
     \section*{\large{What are expressed by user (in high dim.)}}
-    \begin{center}
-    \begin{tabular}{c}
-        Two \textcolor{blue}{similar} examples $\rightarrow$ \textcolor{blue}{\textbf{Must link}}.\\
-        Two \textcolor{red}{dissimilar} examples $\rightarrow$ \textcolor{red}{\textbf{Cannot link}}. \\
-        \includegraphics[height=12.5em]{poster_NADI_2018/images/app_guis_no_annotations.pdf}\\
-        \tiny{Figure: The interface for collecting the users' feedback.}
-    \end{tabular}
-    \end{center}
+    a
     \section*{\large{What are translated to the algorithm (in low dim.)}}
-    \noindent
-    \begin{center}
-    \begin{tabular}{c}
-        Points connected by a \textcolor{blue}{\textbf{Must link}} $\rightarrow$ must stay \textbf{close together}.\\
-        Points connected by a \textcolor{red}{\textbf{Cannot link}} $\rightarrow$ must stay \textbf{far apart}.\\
-        \includegraphics[height=12em]{poster_NADI_2018/images/example_constrains_COIL20_ML.pdf}
-        \includegraphics[height=12em]{poster_NADI_2018/images/example_constrains_COIL20_CL.pdf}\\
-        \tiny{Figure: The user constraints in the visualization (COIL20 dataset).}
-    \end{tabular}
-    \end{center}
+    b
 \end{multicols}
 }
 
 % --------------------------------------------------------------------------- %
 \headerbox{Proposed interactive t-SNE method}{name=method, column=0,span=4,below=constraint}{
-\noindent
-\begin{minipage}{0.48\linewidth}
-    \begin{itemize}
-        \compresslist
-        \item Consider the points in the visualization (low dim.)
-        \item $q_{ij} = $ probability of $i$ and $j$ being neighbors.
-    \end{itemize}
-    \begin{itemize}
-        \item \textcolor{blue}{$S_{\mathcal{M}} = \frac{1}{|\mathcal{M}|} \sum_{(i,j) \in \mathcal{M}} \log q_{ij}.$}
-        \item \textcolor{red}{$S_{\mathcal{C}} = -\frac{1}{|\mathcal{C}|} \sum_{(i,j) \in \mathcal{C}} \log q_{ij}.$}
-        \item \textcolor{BurntOrange}{$S_{\mathcal{M}+\mathcal{C}} = S_{\mathcal{M}} + S_{\mathcal{C}}.$}
-    \end{itemize}
-\end{minipage}
-\begin{minipage}{0.48\linewidth}
-    \begin{center}
-    \begin{tabular}{c}
-        \includegraphics[height=11em]{poster_NADI_2018/images/s_scores_50.pdf}\\
-        \tiny{Figure :Constraint-preserving scores}\\
-        \tiny{with 50 constraints for MNIST dataset.}
-    \end{tabular}
-    \end{center}
-\end{minipage}
-
-\noindent
-\pointer \quad \fbox{Can easily find the perplexity that maximizes \textcolor{blue}{$S_{\mathcal{M}}$}, \textcolor{red}{$S_{\mathcal{C}}$} or \textcolor{BurntOrange}{$S_{\mathcal{M}+\mathcal{C}}$}.}
+a
 }
 
 % --------------------------------------------------------------------------- %
-\headerbox{References}{
-
+\headerbox{References}{name=ref,column=0,span=4,below=method}{
+\includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}
 }
 
 
