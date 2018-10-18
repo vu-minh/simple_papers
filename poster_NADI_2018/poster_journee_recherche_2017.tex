@@ -171,23 +171,27 @@
 
 % --------------------------------------------------------------------------- %
 \headerbox{Different Approaches for Integrating User Constraints}{name=constraint, column=0,span=4,below=interactiveDR}{
-Feedback from users can be seen as \textbf{constraints} at different levels: Instance-level [A], Group-level [B], Feature-level [C] and Dataset-level [D].
+Feedback from users can be seen as \textbf{constraints} at different levels:
+\textbf{Instance-level}$^{[A]}$,
+\textbf{Group-level}$^{[B]}$,
+\textbf{Feature-level}$^{[C]}$,
+and \textbf{Dataset-level}$^{[D]}$.
 
 \begin{multicols}{3}
-    \section*{\small{Feature exploration ([A],[C])}}
+    \section*{\small{Feature exploration (\small{[A],[C]})}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_forward_backward.png}\\
             \tiny{Figure: Forward and Backward Projections \cite{cavallo2017FWBW}}
         \end{tabular}
         \begin{tabular}{p{20em}}
-            Move points to see how the values of their features change.
+            \quad Move points to see how the values of their features change.
             \pointer
             Understand which features determine the position of points.% in the visualization.
         \end{tabular}
     \end{center}
 
-    \section*{\small{Triplet constraints ([A],[B])}}
+    \section*{\small{Triplet constraints (\small{[A],[B]})}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_triplet.png}\\
@@ -200,14 +204,14 @@ Feedback from users can be seen as \textbf{constraints} at different levels: Ins
         \end{tabular}
     \end{center}
 
-    \section*{\small{Example-based constraints ([B],[C],[D])}}
+    \section*{\small{Example-based constraints (\small{[B],[C],[D]})}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_interaxis.png}\\
             \tiny{Figure: InterAxis: Steering Scatterplot Axes \cite{Kim2016InterAxis}}
         \end{tabular}
         \begin{tabular}{p{13em}}
-            Using examples to guide the algorithm to construct the understandable axes.
+            \quad Using examples to guide the algorithm to construct two easy understandable axes.
         \end{tabular}
     \end{center}
 \end{multicols}
@@ -222,24 +226,22 @@ Feedback from users can be seen as \textbf{constraints} at different levels: Ins
 \end{tabular}
 \end{center}
 
-\begin{minipage}{0.46\linewidth}
+\begin{minipage}{0.52\linewidth}
 \noindent
 \begin{itemize}
-    \item \textbf{Idea}: Extend t-SNE to take into account the user's feedback. The user moves points to control the groups:
+    \item \textbf{Idea}: Extend $t$-SNE, a widely used DR method, to take into account the user's feedback. User moves points to control the groups:
+    \noindent
     \begin{itemize}
-        \compresslist
-        \item Move points far apart to divide up a large cluster.
-        \item Move points close together to merge the small similar clusters.
+        % \compresslist
+        \item Moving points close together to merge the small, similar clusters. \small{\color{blue}{(a)}}
+        \item Moving points far apart to divide up a large cluster. \small{\color{blue}{(b)}}
     \end{itemize}
 \end{itemize}
 \end{minipage}
-\begin{minipage}{0.1\linewidth}
- 
-\end{minipage}
-\begin{minipage}{0.45\linewidth}
+\begin{minipage}{0.44\linewidth}
 \noindent
 \begin{itemize}
-    \item \textbf{How it works}: Add a {\color{red} penalty term} to the objective function to force the {\color{blue} neighbors} of the selected points follow these points when they are moved.
+    \item \textbf{How it works}: Add a {\color{red} penalty term} to the objective function of $t$-SNE to force the \emph{neighbors} of the selected points follow these points when they are moved.
     \item \textbf{Points to improve}: Choose the important points to interact with and find a parameter-free and interpretable penalty term.
 \end{itemize}
 \end{minipage}
