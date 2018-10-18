@@ -142,15 +142,15 @@
 \begin{minipage}{0.45\linewidth}
 \begin{itemize}
     % \compresslist
-    \item DR method: an {\color{blue} unsupervised learning} technique to reduce the dimensions of a multivariate dataset while preserving some of its important characteristics.
-    \item Can be used for {\color{blue}visualizing a high dimensional dataset}, but having some issues:
+    \item Dimensionality Reduction is an {\color{blue} unsupervised learning} method to reduce the dimensions of a multivariate dataset while \qquad preserving some of its important characteristics.
+    \item Can be used to {\color{blue}visualize the high dimensional dataset}, but \quad having some issues:
     \noindent
     \begin{itemize}
         \compresslist
         \item Sometimes, it is hard to interpret the visualization results.
-        \item The algorithms can make errors but we cannot correct them without interacting directly with the system.
-      \end{itemize}
-    \item Need human-in-the-loop.
+        \item The algorithms can make mistakes, but we cannot correct them without interacting directly with the system.
+    \end{itemize}
+    \scalebox{2}{\pointer} Need \textbf{human-in-the-loop}.
 \end{itemize}
 \end{minipage}
 \begin{minipage}{0.48\linewidth}
@@ -160,11 +160,11 @@
     \tiny{Figure: Visual analytic with Human-in-the-loop \cite{Sacha2017Interaction}}
 \end{tabular}
 \end{center}
-\quad\quad\textbf{Research questions}:
+\qquad\textbf{Research questions}:
 \begin{itemize}
     \compresslist
     \item How to {\color{blue} integrate human knowledge} into the DR methods?
-    \item How are the user's {\color{blue} the cognitive feedback} translated to {\color{blue} parametric constraints} used in the DR algorithms?
+    \item How the user's {\color{blue} cognitive feedback} are translated to the {\color{blue} parametric constraints} used in the DR algorithms?
 \end{itemize}
 \end{minipage}
 }
@@ -178,7 +178,7 @@ Feedback from users can be seen as \textbf{constraints} at different levels:
 and \textbf{Dataset-level}$^{[D]}$.
 
 \begin{multicols}{3}
-    \section*{\small{Feature exploration (\small{[A],[C]})}}
+    \section*{Feature exploration \small{($[A],[C]$)}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_forward_backward.png}\\
@@ -191,20 +191,20 @@ and \textbf{Dataset-level}$^{[D]}$.
         \end{tabular}
     \end{center}
 
-    \section*{\small{Triplet constraints (\small{[A],[B]})}}
+    \section*{\small{Triplet constraints (\small{$[A],[B]$})}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_triplet.png}\\
             \tiny{Figure: Stochastic Triplet Embedding \cite{van2012ste}}
         \end{tabular}
         \begin{tabular}{p{22em}}
-            \quad\texttt{Triplet} $(i, j, k)$: object $i$ seems more similar to object $j$ than $i$ does to object $k$.
+            \quad\texttt{Triplet} $(i, j, k)$: object $i$ seems more similar to object $j$ than to object $k$.
             \pointer
-            Help experts interactively explore and label the dataset.
+            Help experts explore and label the dataset in an interactive manner.
         \end{tabular}
     \end{center}
 
-    \section*{\small{Example-based constraints (\small{[B],[C],[D]})}}
+    \section*{\small{Example-based constraints (\small{$[B],[C],[D]$})}}
     \begin{center}
         \begin{tabular}{c}
             \includegraphics[height=8em]{poster_NADI_2018/images/eg_interaxis.png}\\
@@ -221,7 +221,7 @@ and \textbf{Dataset-level}$^{[D]}$.
 \headerbox{Proposed Interactive t-SNE Method}{name=method, column=0,span=4,below=constraint}{
 \begin{center}
 \begin{tabular}{c}
-    \includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}\\
+    \includegraphics[width=0.95\linewidth]{poster_NADI_2018/images/tsnex.pdf}\\
     % \tiny{Figure: }
 \end{tabular}
 \end{center}
@@ -242,7 +242,7 @@ and \textbf{Dataset-level}$^{[D]}$.
 \noindent
 \begin{itemize}
     \item \textbf{How it works}: Add a {\color{red} penalty term} to the objective function of $t$-SNE to force the \emph{neighbors} of the selected points follow these points when they are moved.
-    \item \textbf{Points to improve}: Choose the important points to interact with and find a parameter-free and interpretable penalty term.
+    \item \textbf{Points to improve}: Choose the important points to interact with and find an interpretable, parameter-free penalty term.
 \end{itemize}
 \end{minipage}
 }
