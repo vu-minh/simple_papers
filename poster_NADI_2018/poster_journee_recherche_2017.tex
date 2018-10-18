@@ -18,17 +18,18 @@
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\textcolor{blue}{\ding{51}}}%
 \newcommand{\xmark}{\textcolor{red}{\ding{55}}}%
-\newcommand{\pointer}{\scalebox{2}{\ding{43}}}%
+\newcommand{\pointer}{\scalebox{1.0}{\ding{43}}}%
 % \usepackage{tikz}
 % \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
 % \usepackage[backend=bibtex,style=numeric,maxnames=1, minnames=1]{biblatex}
 % \addbibresource{refs.bib}
 
+\usepackage[inline]{enumitem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
 
-\setlength{\columnsep}{1.5em}
+\setlength{\columnsep}{2.5em}
 \setlength{\columnseprule}{0mm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,6 +51,15 @@
 \setlength{\leftmargin}{0pt}%
 }
 
+% reduce space between references
+\newlength{\bibitemsep}\setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+\newlength{\bibparskip}\setlength{\bibparskip}{0pt}
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\parskip}{\bibitemsep}%
+  \setlength{\itemsep}{\bibparskip}%
+}
 
 \contactInfo{%
 \begin{tabular}{c}
@@ -127,37 +137,120 @@
 \sectionfont{\centering}
 
 % --------------------------------------------------------------------------- %
-\headerbox{Dimensionality Reduction (DR) methods in an Interactive Context}{name=interactiveDR,column=0,row=0,span=4}{
+\headerbox{Dimensionality Reduction (DR) Methods in an Interactive Context}{name=interactiveDR,column=0,row=0,span=4}{
 
-\begin{minipage}{0.63\linewidth}   
-a
+\begin{minipage}{0.45\linewidth}
+\begin{itemize}
+    % \compresslist
+    \item DR method: an {\color{blue} unsupervised learning} technique to reduce the dimensions of a multivariate dataset while preserving some of its important characteristics.
+    \item Can be used for {\color{blue}visualizing a high dimensional dataset}, but having some issues:
+    \noindent
+    \begin{itemize}
+        \compresslist
+        \item Sometimes, it is hard to interpret the visualization results.
+        \item The algorithms can make errors but we cannot correct them without interacting directly with the system.
+      \end{itemize}
+    \item Need human-in-the-loop.
+\end{itemize}
 \end{minipage}
-\begin{minipage}{0.33\linewidth}
-b
+\begin{minipage}{0.48\linewidth}
+\begin{center}
+\begin{tabular}{c}
+    \includegraphics[width=0.75\linewidth]{poster_idr01_UNamur_2017/figures/ml_with_human.png}\\
+    \tiny{Figure: Visual analytic with Human-in-the-loop \cite{Sacha2017Interaction}}
+\end{tabular}
+\end{center}
+\quad\quad\textbf{Research questions}:
+\begin{itemize}
+    \compresslist
+    \item How to {\color{blue} integrate human knowledge} into the DR methods?
+    \item How are the user's {\color{blue} the cognitive feedback} translated to {\color{blue} parametric constraints} used in the DR algorithms?
+\end{itemize}
 \end{minipage}
 }
 
 % --------------------------------------------------------------------------- %
-\headerbox{Different approaches for integrating user constraints}{name=constraint,column=0,span=4,below=interactiveDR}{
-\begin{multicols}{2}
-    \section*{\large{What are expressed by user (in high dim.)}}
-    a
-    \section*{\large{What are translated to the algorithm (in low dim.)}}
-    b
+\headerbox{Different Approaches for Integrating User Constraints}{name=constraint, column=0,span=4,below=interactiveDR}{
+Feedback from users can be seen as \textbf{constraints} at different levels: Instance-level [A], Group-level [B], Feature-level [C] and Dataset-level [D].
+
+\begin{multicols}{3}
+    \section*{\small{Feature exploration ([A],[C])}}
+    \begin{center}
+        \begin{tabular}{c}
+            \includegraphics[height=8em]{poster_NADI_2018/images/eg_forward_backward.png}\\
+            \tiny{Figure: Forward and Backward Projections \cite{cavallo2017FWBW}}
+        \end{tabular}
+        \begin{tabular}{p{20em}}
+            Move points to see how the values of their features change.
+            \pointer
+            Understand which features determine the position of points.% in the visualization.
+        \end{tabular}
+    \end{center}
+
+    \section*{\small{Triplet constraints ([A],[B])}}
+    \begin{center}
+        \begin{tabular}{c}
+            \includegraphics[height=8em]{poster_NADI_2018/images/eg_triplet.png}\\
+            \tiny{Figure: Stochastic Triplet Embedding \cite{van2012ste}}
+        \end{tabular}
+        \begin{tabular}{p{22em}}
+            \quad\texttt{Triplet} $(i, j, k)$: object $i$ seems more similar to object $j$ than $i$ does to object $k$.
+            \pointer
+            Help experts interactively explore and label the dataset.
+        \end{tabular}
+    \end{center}
+
+    \section*{\small{Example-based constraints ([B],[C],[D])}}
+    \begin{center}
+        \begin{tabular}{c}
+            \includegraphics[height=8em]{poster_NADI_2018/images/eg_interaxis.png}\\
+            \tiny{Figure: InterAxis: Steering Scatterplot Axes \cite{Kim2016InterAxis}}
+        \end{tabular}
+        \begin{tabular}{p{13em}}
+            Using examples to guide the algorithm to construct the understandable axes.
+        \end{tabular}
+    \end{center}
 \end{multicols}
 }
 
 % --------------------------------------------------------------------------- %
-\headerbox{Proposed interactive t-SNE method}{name=method, column=0,span=4,below=constraint}{
-\includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}
+\headerbox{Proposed Interactive t-SNE Method}{name=method, column=0,span=4,below=constraint}{
+\begin{center}
+\begin{tabular}{c}
+    \includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}\\
+    % \tiny{Figure: }
+\end{tabular}
+\end{center}
+
+\begin{minipage}{0.46\linewidth}
+\noindent
+\begin{itemize}
+    \item \textbf{Idea}: Extend t-SNE to take into account the user's feedback. The user moves points to control the groups:
+    \begin{itemize}
+        \compresslist
+        \item Move points far apart to divide up a large cluster.
+        \item Move points close together to merge the small similar clusters.
+    \end{itemize}
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.1\linewidth}
+ 
+\end{minipage}
+\begin{minipage}{0.45\linewidth}
+\noindent
+\begin{itemize}
+    \item \textbf{How it works}: Add a {\color{red} penalty term} to the objective function to force the {\color{blue} neighbors} of the selected points follow these points when they are moved.
+    \item \textbf{Points to improve}: Choose the important points to interact with and find a parameter-free and interpretable penalty term.
+\end{itemize}
+\end{minipage}
 }
 
 % --------------------------------------------------------------------------- %
 \headerbox{References}{name=ref,column=0,span=4,below=method}{
-\small % Reduce the font size in this block
-\renewcommand{\section}[2]{\vskip 0.05em} % Get rid of the default "References" section title
+\scriptsize % Reduce the font size in this block
+\renewcommand{\section}[2]{\vskip 0.0em} % Get rid of the default "References" section title
 % \nocite{*} % Insert publications even if they are not cited in the poster
-\bibliographystyle{unsrt}
+\bibliographystyle{abbrv}
 \bibliography{refs} % Use sample.bib as the bibliography file
 }
 
