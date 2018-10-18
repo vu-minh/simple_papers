@@ -22,8 +22,8 @@
 % \usepackage{tikz}
 % \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
-\usepackage[backend=bibtex,style=numeric,maxnames=1, minnames=1]{biblatex}
-\addbibresource{refs.bib}
+% \usepackage[backend=bibtex,style=numeric,maxnames=1, minnames=1]{biblatex}
+% \addbibresource{refs.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Multicol Settings
@@ -149,12 +149,16 @@ b
 
 % --------------------------------------------------------------------------- %
 \headerbox{Proposed interactive t-SNE method}{name=method, column=0,span=4,below=constraint}{
-a
+\includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}
 }
 
 % --------------------------------------------------------------------------- %
 \headerbox{References}{name=ref,column=0,span=4,below=method}{
-\includegraphics[width=0.9\linewidth]{poster_NADI_2018/images/tsnex.pdf}
+\small % Reduce the font size in this block
+\renewcommand{\section}[2]{\vskip 0.05em} % Get rid of the default "References" section title
+% \nocite{*} % Insert publications even if they are not cited in the poster
+\bibliographystyle{unsrt}
+\bibliography{refs} % Use sample.bib as the bibliography file
 }
 
 
