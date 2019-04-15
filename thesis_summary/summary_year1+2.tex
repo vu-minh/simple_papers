@@ -1,0 +1,131 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=25mm, right=25mm,
+ top=18mm, bottom=20mm,
+}
+
+% for landscape and long table
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{capt-of}% or use the larger `caption` package
+
+\title{Progress Report: Interactive Machine Learning\\ for Information Visualization}
+\author{Viet~Minh~Vu\\ under the supervision of Prof. Beno\^it~Fr\'enay}
+\date{\today}
+
+
+\begin{document}
+ 
+\maketitle
+
+\section{Scope of the research proposal}
+The research proposal is titled ``Interactive Machine Learning for Information Visualization''.
+Its goal is to use the machine learning algorithms to visualize and analyze the high dimensional given data.
+The visualization we care about is a representation in 2-dimensional space of an ensemble of the data points (a scatter plot).
+This representation is often called the embedding in low dimensional or latent space.
+It must reveal some important hidden structures of the input data, such as the similar points should stay close or the dissimilar ones should stay apart in the visualization.
+The algorithm is considered to learn from the data, i.e., it can produce a mapping to project the high dimensional data into a 2D space, if it can uncover the hidden patterns in the data which are useful for the user.
+But instead of letting the \emph{dimensionality reduction} (DR) algorithms operate automatically, this work tries to integrate the user's interactions into the workflow.
+Our goals is to take advantages of the human feedbacks to correct the errors of the learning system and to allow the users to manipulate the visualization according to their needs.
+The expected visualization is not only algorithmically optimized but also understandable and explainable to the human.
+Several research directions are explored in the first two years and the primary result are presented in Sec. \ref{sec:results}. Our perspective and research plan for the last two years are presented in Sec.~\ref{sec:work}.
+
+
+\section{Achievements}\label{sec:results}
+We start by reviewing several existing interactive dimensionality reduction (DR) methods, and then try to integrate a simple type of constraint to $t$-Distributed Stochastic Neighbor Embedding ($t$-SNE), a well known DR method.
+$t$-SNE is a powerful and flexible DR method but requires a difficult fine-tuning process to find its best hyper-parameter. We propose an interactive method that takes the user selected pairwise constraints between objects and use them to select the best $t$-SNE visualization.
+We also try to integrate directly the user's feedbacks on the positions of the points in the 2D space into a probabilistic DR method.
+This approach produces a potential result and plays a key role to lead us to a novel class of interactive probabilistic DR methods for our future research.
+ 
+
+A systematic review of several existing \emph{visual analysis} methods is first conducted.
+We consider the users' interactions as the \emph{constraints} to the DR methods.
+For example, the users can interact directly with the visualization to fix the positions of their interested points or to make links to express similar/dissimilar points (\emph{instance-level} constraints).
+The learning algorithms translate these cognitive feedbacks into the logical constraints for the optimization produce.
+
+Our first proposed method is to integrate the \emph{must-be-here} constraints on the positions of points into the widely used $t$-SNE method.
+Via an interactive interface, the user can move some anchor points and fix their positions in the 2D scatter plot to indicate which points should stay close together or far apart.
+This method can split a dense group or merge some small groups.
+%but it only work locally, i.e.\ only the group around the selected points are affected while the positions of other points do not change too much.
+Technically, the constraints on the positions of the fixed points are formulated as a regularization term to jointly optimized with the original objective function of $t$-SNE.
+This approach has only local affect to the points around the selected points.
+This drawback suggests us to find a better regularization term to represent the constraints between objects in such a way that, e.g., the \emph{semantic similarity} between objects can be preserved.
+
+The second proposed method tackles the problem of finding the best hyper-parameter for $t$-SNE.
+We let the users define their requirements about their expected visualization in advance by selecting several pairs between objects.
+These pairwise constraints describe the relation between the data points in high dimensional space, (such as a similar link connecting two \emph{visually similar} objects or a dissimilar link connecting two \emph{visually different} objects), and then are translated to a numerical score to rank the precalculated embeddings in order to find the best one.
+Despite the fact that our novel method deals with an interesting problem and shows a good result with the auto-generated constraints, our \emph{TVCG} paper is rejected since it lacks a scalability and stability property and we miss an evaluation with the real user interactions.
+
+The third proposed method, ``user-steering interpretable visualization with probabilistic principle component analysis (\emph{PPCA})'', is accepted as an \emph{ESANN} conference paper, which leads us to a new open research direction of probabilistic DR methods (with more details in the next section).
+With this method, the user can manipulate some selected points in 2D space to create a new embedding which is more understandable, i.e., easy to explain the meaning of the axes in the newly created visualization.
+
+
+\section{Research plan for the next two years}\label{sec:work}
+As described above, our current approach is to incorporate the user constraints into some basic DR methods.
+This discrete approach has been well studied with many visual analysis methods (as reviewed in our work) but it has an inconvenient.
+The representation of the user constraints is tied to the objective function of the selected DR method, that why we found a wide variety of specifically designed method for different type of constraints.
+This difficulty forces us to deal with two separate problems at the same time: representation of users' feedbacks and solving the constrained optimization problem.
+
+For this research project, we have proposed a solution which is implemented in the ESANN paper and proved its potential result.
+We use a probabilistic approach to formulate the users' constraints in a dimensionality reduction problem.
+The visualization is indeed the latent positions of each data point in the low dimensional space which are modeled as the latent variables we need to find.
+We can define a generative process to describe how to obtain the high dimensional data assuming that we know their corresponding latent positions.
+It should note that this step is easier than its invert direction of finding a mapping to project the high dimensional data into a lower dimensional space as in the original DR method.
+Let start from our initial belief about the latent variables, which is maybe simply a guess or some random values.
+The more the real data we observe, the closer to the real values of the latent variables we can obtain.
+Leveraging the power of Bayesian framework, we strengthen our initial belief about the latent variables in the light of given data and obtain a generative model
+which can tell us the inferred latent positions of each data point and also how certain the model is.
+
+Our main concern is thus about modeling the user's feedbacks.
+For example, in the proposed interactive \emph{PPCA}, the user's feedbacks on the positions of in the visualization are directly modeled as the prior distributions for the corresponding selected latent variables.
+The positions of other points are automatically inferred from the model.
+In that way, the user can control the positions of some anchor points in order to manipulate the whole visualization.
+
+We plan to work on the two following research questions.
+(1) Which elements in the Bayesian framework (the prior, the likelihood) can be used to model the user's feedbacks, and how?
+(2) How to evaluate the proposed model in an interactive context with online feedbacks of the real users?
+An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network) for the generative process and also from a high efficient optimization toolbox to solve the inference problem.
+That will help us stay focused on the main research questions.
+
+
+\afterpage{%
+    \clearpage%
+    \begin{landscape}
+        \section*{Timeline in the first two years}
+        \centering
+        \begin{longtable}{p{.07\linewidth}|p{.16\linewidth}|p{.40\linewidth}|p{.30\linewidth}}
+
+            Time & Work & Summary & Result \\
+            \hline \hline
+
+            09/2017 - 12/2017 (4m) & Survey on constraints in DR methods. & Reading SOTA, focusing on the user's feedbacks which can be represented as constraints for the DR methods. & A survey paper, but having two serious problems: the scope is too large and the survey is not well structured. (Pending) \\ 
+            %&&&\\
+
+            01/2018 - 03/2018 (3m) & Integrating must-be-here constraints to tSNE. & The feedback on the positions of some control points is formulated as regularization term to jointly optimized with the objective function of tSNE. & A prototype (1) allowing the use to interact directly with the visualization (to move the control points) and (2) evaluating the user's feedbacks in form of different regularization types. (Stopped) \\
+            %&&&\\
+
+            04/2018 - 07/2018 (4m) & Using user constraints to select the best visualization of tSNE. & Introduce the \emph{user-preserving scores} to quantify the user's feedbacks in form of similar/dissimilar pairs of points and use this score to heuristically find the best tSNE embedding. & The proposed score with auto-generated constraints agrees with several visualization quality metrics and shows the potential results with some datasets. A \emph{TVCG} paper is rejected. \\
+            %&&&\\
+            
+            08/2018 - 11/2018 (4m) & User-steering visualization with \emph{PPCA}. & Construct an interactive Probabilistic PCA model which allows the users to set positions for some selected points in the embedding. These feedbacks are translated into a Bayesian framework in form of prior knowledge on some control points in the latent (embedding) space. The resulting positions of all other points will be inferred automatically. & Integrating the user's feedbacks directly into a probabilistic model (in a Bayesian framework) is a potential research direction. An ESANN paper is accepted. \\
+            %&&&\\
+
+            12/2018 - 02/2019 (3m) & Mixture of Probabilistic PCA model. & Make the PPCA model more powerful by introducing a mixture of many of independent PPCA. A long-term goal is to do clustering in latent space and do dimensionality reduction at the same time. The expected result is the position of data points in latent space and also theirs predicted labels in order to distinguish the group in the visualization. & Trying different inference methods, including solving the MAP problem analytically, using black-box variational inference and MCMC toolbox, but still do not obtain the good results. (WIP) \\
+            %&&&\\
+            
+            03/2019 - 04/2019 (2m) & Rework on rejected TVCG paper. & Try to solve two big remaining problems on the scalability/stability of tSNE and the evaluation with real user interactions. & Propose chain-tSNE and a prototype allowing the user to select and observe the similar/dissimilar pairs visually. However still seeing some problems with the proposed scores with the manual constraints. (WIP) \\
+        %\caption{The timeline of works in the first 20 months.}
+        \end{longtable}
+
+
+    \end{landscape}
+    \clearpage%
+} % afterpage
+
+\end{document}
+
