@@ -23,63 +23,66 @@
  
 \maketitle
 
-\section{Scope of the research proposal}
+\section{Scope of the Research Proposal}
 The research proposal is titled ``Interactive Machine Learning for Information Visualization''.
-Its goal is to use the machine learning algorithms to visualize and analyze the given high dimensional data.
-The visualization we care about is a representation in 2-dimensional space of an ensemble of data points (a scatter plot).
+Its goal is to use machine learning algorithms to visualize and analyze high~dimensional data.
+The visualization is a representation in a 2-dimensional space of an ensemble of data points (a scatter plot).
 This representation is often called the embedding in low dimensional or latent space.
-It must reveal some important hidden structures of the input data, such as the similar points should stay close together or the dissimilar ones should stay apart in the visualization.
-The algorithm is considered to be able to learn from the data, i.e., it can produce a mapping to project the high dimensional data into a 2D space, if it can uncover the hidden patterns in the data which are useful for the user.
+It must reveal hidden structures of the input data and preserves its characteristics, such as similar points should stay close together or dissimilar ones should stay apart in the visualization.
+The algorithm is considered to be able to learn from the data, i.e., it can automatically produce a mapping to project the high dimensional data into a 2D space, if it can uncover the hidden patterns in the data which are useful for the user.
 But instead of letting the \emph{dimensionality reduction} (DR) algorithms operate automatically, this work tries to integrate the user's interactions into the workflow.
 Our goals are to take advantages of the human feedback to correct the errors of the learning system and to allow the users to manipulate the visualization according to their needs.
 The expected visualization is not only algorithmically optimized but also understandable and explainable to the human.
-Several research directions are explored in the first two years and the primary results are presented in Sec. \ref{sec:results}. Our perspective and research plan for the next two years are presented in Sec.~\ref{sec:work}.
+Several research directions are explored in the first two years and the primary results are presented in Section~\ref{sec:results}. Our perspective and research plan for the next two years are presented in Section~\ref{sec:work}.
 
 
-\section{Achievements}\label{sec:results}
+\section{Achievements during the First Two Years}\label{sec:results}
 We started by reviewing over 50 existing interactive dimensionality reduction (DR) methods, then tried to integrate a simple type of constraint to $t$-Distributed Stochastic Neighbor Embedding ($t$-SNE), a well known DR method.
 $t$-SNE is a powerful and flexible DR method but requires a difficult fine-tuning process to find its best hyper-parameter. 
 We propose an interactive method that takes the user-selected pairwise constraints between objects and use them to select the best $t$-SNE visualization.
-We also try to integrate the user's feedback on the positions of the points in 2D space directly into a probabilistic DR method.
-This approach produces a potential result and leads us to a novel class of interactive probabilistic DR methods for our future research.
+We also try to integrate the user's feedback on the positions of the points in the 2D space directly into a probabilistic DR method.
+This approach leads us to a novel class of interactive probabilistic DR methods for our future research.
  
 
-A systematic review of several existing \emph{visual analysis} methods is first conducted.
+A systematic review of variety of existing \emph{visual analysis} methods is first conducted.
 We consider the users' interactions as the \emph{constraints} to the DR methods.
 For example, the users can interact directly with the visualization to fix the positions of their interested points or to make links to express similar/dissimilar points.
 Most of the reviewed methods translate these cognitive feedbacks into logical constraints for the optimization procedure.
+We plan to narrow down the scope of the reviewed methods to conduct a survey paper for a specified group of probabilistic DR methods which is our main research topic in the next two years.
 
 Our first proposed method is to integrate the \emph{must-be-here} constraints on the positions of points into the widely used $t$-SNE method.
 Via an interactive interface, the user can move some anchor points and fix their positions in the 2D scatter plot to indicate which points should stay close together or far apart.
 This method can split a dense group or merge some small groups.
-%but it only work locally, i.e.\ only the group around the selected points are affected while the positions of other points do not change too much.
 Technically, the constraints on the positions of the fixed points are formulated as a regularization term to be jointly optimized with the original objective function of $t$-SNE.
-This approach has only local affect to the points around the selected points.
+This approach has only a local effect to the points around the selected points.
 This drawback suggests us to find a better regularization term to represent the constraints between objects in such a way that, e.g., the \emph{semantic similarity} between objects can be preserved.
 
 The second proposed method tackles the problem of finding the best hyper-parameter for $t$-SNE.
-We let the users define their requirements about their expected visualization in advance by specifying the relation between the data points in high dimensional space, (such as a similar link connecting two \emph{visually similar} objects or a dissimilar link connecting two \emph{visually different} objects). These pairwise constraints are then translated to a numerical score to rank the pre-calculated embeddings in order to find the best one.
-Despite the fact that our novel method deals with an interesting problem and shows good result with the auto-generated constraints, our \emph{TVCG} paper is rejected since it lacks the scalability and stability property and misses an evaluation with the real user interactions.
+We let the users define their requirements about their expected visualization in advance by specifying the relation between the data points in high dimensional space (such as a similar link connecting two \emph{visually similar} objects or a dissimilar link connecting two \emph{visually different} objects).
+These pairwise constraints are then translated to a numerical score to rank the pre-calculated embeddings in order to find the best one.
+This work was submitted to the highly ranked IEEE TVCG journal.
+After receiving the comments and suggestions of the reviewers, we are working on improving the scalability and stability aspect and evaluating our method with the real user interactions to resubmit this work.
 
-The third proposed method, ``user-steering interpretable visualization with probabilistic principle component analysis (\emph{PPCA})'', is accepted as an \emph{ESANN} conference paper, which leads us to a new open research direction of probabilistic DR methods (with more details in the next section).
+The third proposed method ``user-steering interpretable visualization with probabilistic principle component analysis (\emph{PPCA})'' is accepted in the international \emph{ESANN} conference, which leads us to a new open research direction of probabilistic DR methods (with more details in the next section).
 In this method, the user can manipulate some selected points in 2D space to create a more understandable embedding, i.e., it is easier to explain the meaning of the axes in the newly created visualization.
 
 
-\section{Research plan for the next two years}\label{sec:work}
+\section{Research Plan for the Next Two Years}\label{sec:work}
 As described above, our current approach is to incorporate the user constraints into some basic DR methods.
-This discrete approach has been well studied (with many visual analysis methods reviewed in our previous work) but there still exists an inconvenience.
+This discrete approach has been well studied (with many visual analysis methods reviewed in our previous work), but there still exists an inconvenience.
 The representation of the user constraints is tied to the objective function of the selected DR method.
 That is why we found a wide variety of specifically designed methods for different types of constraints.
 This difficulty forces us to deal with two separate problems at the same time: users' feedbacks representation and constrained optimization problem.
 
-For this research project, we have proposed a solution which is implemented in the ESANN paper and proved its potential result.
+For this research project, we have proposed a solution which is implemented in the ESANN paper and proved its potential.
 We use a probabilistic approach to formulate the users' constraints in a dimensionality reduction problem.
 The visualization is indeed the latent positions of each data point in the low dimensional space which are modeled as the latent variables.
 A generative process is defined to describe how to obtain the high dimensional data assuming that we know their corresponding latent positions.
-It should note that this step is easier than its invert direction of finding a mapping to project the high dimensional data into a lower dimensional space as in the original DR method.
-Let start from our initial belief about the latent variables.
-The more data we observe, the closer to the real values of the latent variables we can obtain.
-Leveraging the power of Bayesian framework, we strengthen our initial belief about the latent variables in the light of given data and obtain a model which can tell us the inferred latent positions of each data point and also how certain the model is.
+This step is easier than (its invert direction of) finding a mapping to project the high dimensional data into a lower dimensional space as in the original DR method.
+Our problem of finding the latent variables given the observed data is called inference problem, which can be solved efficiently under a Bayesian framework.
+% Let start from our initial belief about the latent variables.
+% The more data we observe, the closer to the real values of the latent variables we can obtain.
+% Leveraging the power of Bayesian framework, we strengthen our initial belief about the latent variables in the light of given data and obtain a model which can tell us the inferred latent positions of each data point and also how certain the model is.
 
 Our main concern is thus about modeling the user's feedbacks.
 For example, in our proposed interactive \emph{PPCA}, the user's feedbacks on the positions of the selected points in the visualization are directly modeled as the prior distributions for the corresponding selected latent variables.
@@ -87,10 +90,11 @@ The positions of the other points are automatically inferred from the model.
 In that way, the user can control the positions of some anchor points in order to manipulate the whole visualization.
 
 We plan to work on the two following research questions.
-(1) Which elements in the Bayesian framework (the prior, the likelihood) can be used to model the user's feedbacks, and how?
+(1) How to deeply integrate the user's constraints into a probabilistic model?
 (2) How to evaluate the proposed model in an interactive context with online feedbacks of the real users?
-An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network) for the generative process and also from a high efficient optimization toolbox to solve the inference problem.
-That helps us stay focused on the main research questions without worrying about the underlying complex optimization process.
+An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network as in \emph{Autoencoder} method) for the generative process and also from a high efficient optimization toolbox to solve the inference problem (i.e., an universal \emph{Variational Inference} method).
+% That helps us stay focused on the main research questions without worrying about the underlying complex optimization process.
+Modeling the user's constraints in a \emph{Variational Autoencoder} framework is a typical problem we are now starting to work on.
 
 
 \afterpage{%
