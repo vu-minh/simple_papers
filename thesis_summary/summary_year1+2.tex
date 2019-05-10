@@ -24,11 +24,10 @@
 \maketitle
 
 \section{Scope of the Research Proposal}
-The research proposal is titled ``Interactive Machine Learning for Information Visualization''.
-Its goal is to use machine learning algorithms to visualize and analyze high~dimensional data.
+The goal of the research proposal titled ``Interactive Machine Learning for Information Visualization'' is to use machine learning algorithms to visualize and analyze high~dimensional data.
 The visualization is a representation in a 2-dimensional space of an ensemble of data points (a scatter plot).
 This representation is often called the embedding in low dimensional or latent space.
-It must reveal hidden structures of the input data and preserves its characteristics, such as similar points should stay close together or dissimilar ones should stay apart in the visualization.
+It must reveal hidden structures of the input data and preserves its characteristics, such as similar points should stay close together or dissimilar points should stay apart in the visualization.
 The algorithm is considered to be able to learn from the data, i.e., it can automatically produce a mapping to project the high dimensional data into a 2D space, if it can uncover the hidden patterns in the data which are useful for the user.
 But instead of letting the \emph{dimensionality reduction} (DR) algorithms operate automatically, this work tries to integrate the user's interactions into the workflow.
 Our goals are to take advantages of the human feedback to correct the errors of the learning system and to allow the users to manipulate the visualization according to their needs.
@@ -63,7 +62,7 @@ These pairwise constraints are then translated to a numerical score to rank the 
 This work was submitted to the highly ranked IEEE TVCG journal.
 After receiving the comments and suggestions of the reviewers, we are working on improving the scalability and stability aspect and evaluating our method with the real user interactions to resubmit this work.
 
-The third proposed method ``user-steering interpretable visualization with probabilistic principle component analysis (\emph{PPCA})'' is accepted in the international \emph{ESANN} conference, which leads us to a new open research direction of probabilistic DR methods (with more details in the next section).
+The third proposed method ``user-steering interpretable visualization with probabilistic principle component analysis (\emph{PPCA})'' is accepted for presentation and publication at the international \emph{ESANN} conference, which leads us to a new open research direction of probabilistic DR methods (with more details in the next section).
 In this method, the user can manipulate some selected points in 2D space to create a more understandable embedding, i.e., it is easier to explain the meaning of the axes in the newly created visualization.
 
 
@@ -92,44 +91,44 @@ In that way, the user can control the positions of some anchor points in order t
 We plan to work on the two following research questions.
 (1) How to deeply integrate the user's constraints into a probabilistic model?
 (2) How to evaluate the proposed model in an interactive context with online feedbacks of the real users?
-An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network as in \emph{Autoencoder} method) for the generative process and also from a high efficient optimization toolbox to solve the inference problem (i.e., an universal \emph{Variational Inference} method).
+An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network as in the \emph{autoencoder} method) for the generative process and also from a high efficient optimization toolbox to solve the inference problem (i.e., an universal \emph{variational inference} method).
 % That helps us stay focused on the main research questions without worrying about the underlying complex optimization process.
-Modeling the user's constraints in a \emph{Variational Autoencoder} framework is a typical problem we are now starting to work on.
+Modeling the user's constraints in a \emph{variational autoencoder} framework is a typical problem we are now starting to work on.
 
 
-\afterpage{%
-    \clearpage%
-    \begin{landscape}
-        \section*{Timeline in the first two years}
-        \centering
-        \begin{longtable}{p{.07\linewidth}|p{.16\linewidth}|p{.40\linewidth}|p{.30\linewidth}}
+% \afterpage{%
+%     \clearpage%
+%     \begin{landscape}
+%         \section*{Timeline in the first two years}
+%         \centering
+%         \begin{longtable}{p{.07\linewidth}|p{.16\linewidth}|p{.40\linewidth}|p{.30\linewidth}}
 
-            Time & Work & Summary & Result \\
-            \hline \hline
+%             Time & Work & Summary & Result \\
+%             \hline \hline
 
-            09/2017 - 12/2017 (4m) & Survey on constraints in DR methods. & Reading SOTA, focusing on the user's feedbacks which can be represented as constraints for the DR methods. & A survey paper, but having two serious problems: the scope is too large and the survey is not well structured. (Pending) \\ 
-            %&&&\\
+%             09/2017 - 12/2017 (4m) & Survey on constraints in DR methods. & Reading SOTA, focusing on the user's feedbacks which can be represented as constraints for the DR methods. & A survey paper, but having two serious problems: the scope is too large and the survey is not well structured. (Pending) \\ 
+%             %&&&\\
 
-            01/2018 - 03/2018 (3m) & Integrating must-be-here constraints to tSNE. & The feedback on the positions of some control points is formulated as regularization term to jointly optimized with the objective function of tSNE. & A prototype (1) allowing the use to interact directly with the visualization (to move the control points) and (2) evaluating the user's feedbacks in form of different regularization types. (Stopped) \\
-            %&&&\\
+%             01/2018 - 03/2018 (3m) & Integrating must-be-here constraints to tSNE. & The feedback on the positions of some control points is formulated as regularization term to jointly optimized with the objective function of tSNE. & A prototype (1) allowing the use to interact directly with the visualization (to move the control points) and (2) evaluating the user's feedbacks in form of different regularization types. (Stopped) \\
+%             %&&&\\
 
-            04/2018 - 07/2018 (4m) & Using user constraints to select the best visualization of tSNE. & Introduce the \emph{user-preserving scores} to quantify the user's feedbacks in form of similar/dissimilar pairs of points and use this score to heuristically find the best tSNE embedding. & The proposed score with auto-generated constraints agrees with several visualization quality metrics and shows the potential results with some datasets. A \emph{TVCG} paper is rejected. \\
-            %&&&\\
+%             04/2018 - 07/2018 (4m) & Using user constraints to select the best visualization of tSNE. & Introduce the \emph{user-preserving scores} to quantify the user's feedbacks in form of similar/dissimilar pairs of points and use this score to heuristically find the best tSNE embedding. & The proposed score with auto-generated constraints agrees with several visualization quality metrics and shows the potential results with some datasets. A \emph{TVCG} paper is rejected. \\
+%             %&&&\\
             
-            08/2018 - 11/2018 (4m) & User-steering visualization with \emph{PPCA}. & Construct an interactive Probabilistic PCA model which allows the users to set positions for some selected points in the embedding. These feedbacks are translated into a Bayesian framework in form of prior knowledge on some control points in the latent (embedding) space. The resulting positions of all other points will be inferred automatically. & Integrating the user's feedbacks directly into a probabilistic model (in a Bayesian framework) is a potential research direction. An ESANN paper is accepted. \\
-            %&&&\\
+%             08/2018 - 11/2018 (4m) & User-steering visualization with \emph{PPCA}. & Construct an interactive Probabilistic PCA model which allows the users to set positions for some selected points in the embedding. These feedbacks are translated into a Bayesian framework in form of prior knowledge on some control points in the latent (embedding) space. The resulting positions of all other points will be inferred automatically. & Integrating the user's feedbacks directly into a probabilistic model (in a Bayesian framework) is a potential research direction. An ESANN paper is accepted. \\
+%             %&&&\\
 
-            12/2018 - 02/2019 (3m) & Mixture of Probabilistic PCA model. & Make the PPCA model more powerful by introducing a mixture of many of independent PPCA. A long-term goal is to do clustering in latent space and do dimensionality reduction at the same time. The expected result is the position of data points in latent space and also theirs predicted labels in order to distinguish the group in the visualization. & Trying different inference methods, including solving the MAP problem analytically, using black-box variational inference and MCMC toolbox, but still do not obtain the good results. (WIP) \\
-            %&&&\\
+%             12/2018 - 02/2019 (3m) & Mixture of Probabilistic PCA model. & Make the PPCA model more powerful by introducing a mixture of many of independent PPCA. A long-term goal is to do clustering in latent space and do dimensionality reduction at the same time. The expected result is the position of data points in latent space and also theirs predicted labels in order to distinguish the group in the visualization. & Trying different inference methods, including solving the MAP problem analytically, using black-box variational inference and MCMC toolbox, but still do not obtain the good results. (WIP) \\
+%             %&&&\\
             
-            03/2019 - 04/2019 (2m) & Rework on the rejected TVCG paper. & Try to solve two big remaining problems on the scalability/stability of tSNE and the evaluation with real user interactions. & Propose chain-tSNE and a prototype allowing the user to select and observe the similar/dissimilar pairs visually. However still seeing some problems with the proposed scores with the manual constraints. (WIP) \\
-        %\caption{The timeline of works in the first 20 months.}
-        \end{longtable}
+%             03/2019 - 04/2019 (2m) & Rework on the rejected TVCG paper. & Try to solve two big remaining problems on the scalability/stability of tSNE and the evaluation with real user interactions. & Propose chain-tSNE and a prototype allowing the user to select and observe the similar/dissimilar pairs visually. However still seeing some problems with the proposed scores with the manual constraints. (WIP) \\
+%         %\caption{The timeline of works in the first 20 months.}
+%         \end{longtable}
 
 
-    \end{landscape}
-    \clearpage%
-} % afterpage
+%     \end{landscape}
+%     \clearpage%
+% } % afterpage
 
 \end{document}
 
