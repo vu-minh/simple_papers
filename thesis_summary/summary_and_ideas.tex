@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[11pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 %\geometry{
@@ -7,6 +7,11 @@
 % left=25mm, right=25mm,
 % top=18mm, bottom=20mm,
 %}
+
+%Import the natbib package and sets a bibliography  and citation styles
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}}
 
 % for landscape and long table
 \usepackage{longtable}
@@ -66,7 +71,45 @@ The third proposed method ``user-steering interpretable visualization with proba
 In this method, the user can manipulate some selected points in 2D space to create a more understandable embedding, i.e., it is easier to explain the meaning of the axes in the newly created visualization.
 
 
+\section{On Going Works with $t$-SNE}\label{sec:tsne}
+The advantage of $t$-SNE is to preserve local structures and also global structure of the data.
+Conceptually, we can say a visualization is easy to understand if we can see clearly the groups in it.
+However, as pointed out in \emph{how to use $t$-SNE effectively}~\citep{wattenberg2016how}
+% , one of the major difficulties when applying $t$-SNE is how to connect the intuition about the data in high dimensional space to its representation in 2-dimensional space. More specifically, 
+``cluster sizes in a t-SNE plot mean nothing'' and ``distances between clusters might not mean anything''.
+That means the within-cluster distances and between-clusters distances are not well preserved in the $t$-SNE embeddings.
+
+A question can be raised: do we need a $t$-SNE embedding that reflects well the size of groups and relative distances between groups?
+If yes, can we use the pairwise constraints between similar and dissimilar data points in high dimensional space to guide $t$-SNE to overcome the above drawback? 
+A common approach to integrate the constraints is to present them as a regularization term to jointly optimized with the original objective function of $t$-SNE.
+As summarized in a recent theoretical analysis of \emph{contrastive} unsupervised representation learning~\citep{arora2019theoretical}, 
+one can present the pairwise constraints in form of \emph{semantic similarity}
+\[
+    - \log \frac{\exp \big(f(x)^T f(x^+) \big)}
+                {\exp \big(f(x)^T f(x^+) \big) + \exp \big(f(x)^T f(x^-) \big)},
+\]
+where $f(x)$ is a representation function of a sample $x$, $x^+$ and $x^-$ are its corresponding \emph{positive} and \emph{negative} samples, which can be easily selected by the user.
+Another way is to use \emph{triplet} constraints $(x,x^+,x^-)$ to represent $x$ is closer to $x^+$ than to $x^-$. The regularization term $||f(x) - f(x^+) ||^2 - || f(x) - f(x^-) ||^2$, aka triplet loss~\citep{schroff2015facenet} should be minimized.
+
+Another problem is how to find the perplexity for $t$-SNE automatically?
+As presented above, we have tried to use the user defined constraints on the similarity/dissimilarity of data points as a criterion to find the best visualization.
+But this approach has a big drawback in its scalability.
+We need to heuristically search through all pre-calculated embeddings to find the best one that maximizes the constraint preserving score.
+A simple but efficient solution is to use a classical Bayesian optimization approach. (For a gentel introduction, see~\citep{brochu2010tutorial}).
+Bayesian optimization (\emph{BayesOpt}) is an old method of find the maximum of any black-box, expensive cost function.
+We can define our target function as a combination of the proposed constraint score and/or any visualization quality metric.
+Our goal is thus to find the best visualization that respects the constraints of the user and also has a good quality metric measure.
+BayesOpt builds a probabilistic model of the target function and uses it to select the most promissing hyperparameters to evaluate.
+In our recent experiments, instead of doing linear search with hundreds of possible hyperparameters, we need to test only dozens of them to find the best one.
+The remaining work consists of choosing or combining the stategies to predict the next hypterparameter to try in BayesOpt.
+The core element in BayesOpt that we use is \emph{Gaussian Process} model, which will be detailed in the next section.
+
+
 \section{Research Plan for the Next Two Years}\label{sec:work}
+Our current research topic is on incorporating the user constraints in to some basic DR methods.
+In order to finish the two on going works on $t$-SNE, we propose some ideas in Section \ref{sec:tsne}.
++ Bayesian visual analytics (\emph{BaVA}) framework~\citep{house2015bayesian}
+
 As described above, our current approach is to incorporate the user constraints into some basic DR methods.
 This discrete approach has been well studied (with many visual analysis methods reviewed in our previous work), but there still exists an inconvenience.
 The representation of the user constraints is tied to the objective function of the selected DR method.
@@ -93,12 +136,23 @@ We plan to work on the two following research questions.
 (2) How to evaluate the proposed model in an interactive context with online feedbacks of the real users?
 An interesting aspect in this approach is that, we can benefit from a high-capacity representation function (i.e., a neural network as in the \emph{autoencoder} method) for the generative process and also from a high efficient optimization toolbox to solve the inference problem (i.e., an universal \emph{variational inference} method).
 % That helps us stay focused on the main research questions without worrying about the underlying complex optimization process.
-Modeling the user's constraints in a \emph{variational autoencoder} framework is a typical problem we are now starting to work on. \cite{bengio2013representation}, \citep{bengio2013representation}
+Modeling the user's constraints in a \emph{variational autoencoder} framework is a typical problem we are now starting to work on.
+
+\subsection{Using \emph{Gaussian Processes} for Modeling the User's Feedbacks}\label{sec:prob_dr}
+Key papers:
++ Gaussian Process Latent Variable Models (GP-LVM)
++ Probabilistic Non-linear PCA with GP-LVM
+
+\subsection{Interactive Visualization in Deep Learning Model}\label{sec:nn}
++ distilpub
++ viz pre-learned model (ICLR)
++ VAE
++ Semisupervised VAE
 
 
 \medskip
  
-\bibliographystyle{unsrt}
+% \bibliographystyle{unsrt}
 \bibliography{refs.bib}
 
 
