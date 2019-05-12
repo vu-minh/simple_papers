@@ -33,7 +33,7 @@
 \section{Scope of the Research Proposal}
 The goal of the research proposal titled ``Interactive Machine Learning for Information Visualization'' is to use machine learning algorithms to interactively visualize and analyze high~dimensional data.
 The visualization is a representation in a 2-dimensional space of an ensemble of data points (a scatter plot).
-This representation is often called the embedding in low dimensional or latent space and can be found automatically by the \emph{dimensionality reduction} (DR) methods.
+This representation is often called the embedding in low dimensional space or latent space and can be found automatically by the \emph{dimensionality reduction} (DR) methods.
 It must reveal hidden structures of the input data and preserves its characteristics, such as similar points should stay close together or dissimilar points should stay apart in the visualization.
 % The algorithm is considered to be able to learn from the data, i.e., it can automatically produce a mapping to project the high dimensional data into a 2D space, if it can uncover the hidden patterns in the data which are useful for the user.
 But instead of letting the DR algorithms operate automatically, this work tries to integrate the user's interactions into the workflow.
@@ -87,18 +87,19 @@ In that way, the user can control the positions of some anchor points in order t
 
 
 \section{On Going Works with $t$-SNE}\label{sec:tsne}
-\subsection{Integrating pairwise constraints to $t$-SNE}
-The advantage of $t$-SNE is to preserve local structures and also global structure of the data.
+$t$-SNE is widely used in practice and has an advantage of preserving local structures and also global structure of the data.
 Conceptually, we can say a visualization is easy to understand if we can see clearly the groups in it.
-However, as pointed out in \emph{how to use $t$-SNE effectively}~\citep{wattenberg2016how}
-% , one of the major difficulties when applying $t$-SNE is how to connect the intuition about the data in high dimensional space to its representation in 2-dimensional space. More specifically, 
-``cluster sizes in a $t$-SNE plot mean nothing'' and ``distances between clusters might not mean anything''.
-That means the within-cluster distances and between-clusters distances are not well preserved in the $t$-SNE embeddings.
+However, as pointed out in \emph{how to use $t$-SNE effectively}~\citep{wattenberg2016how}, ``cluster sizes in a $t$-SNE plot mean nothing'' and ``distances between clusters might not mean anything''.
+That means the within-cluster distances and between-clusters distances are not always well preserved in the $t$-SNE embeddings.
+We would like to try to use the pairwise constraints to guide $t$-SNE to overcome this first drawback (Section~\ref{sec:tsne:constraints}).
+The second difficulty when working with $t$-SNE is to find its perplexity.
+We suggest to use the scores from the user's constraints as a criterion to evaluate the visualization and use Bayesian Optimization to select the best perplexity (Section~\ref{sec:tsne:bo}).
 
-A question can be raised: do we need a $t$-SNE embedding that reflects well the size of groups and relative distances between groups?
-If yes, can we use the pairwise constraints between similar and dissimilar data points in high dimensional space to guide $t$-SNE to overcome the above drawback? 
-A common approach to integrate the constraints is to represent them as a regularization term to be jointly optimized with the original objective function of $t$-SNE.
-One can present the pairwise constraints in a simple form of \emph{semantic similarity}~\citep{logeswaran2018efficient}:
+\subsection{Integrating pairwise constraints to $t$-SNE}\label{sec:tsne:constraints}
+We are experimenting to see if the pairwise constraints between similar and dissimilar data points in high dimensional space can help $t$-SNE to overcome the above drawback. 
+It can be useful if we have a $t$-SNE embedding that reflects well the size of groups and relative distances between groups.
+A common approach to integrate the constraints is to represent them as a regularization term to be optimized together with the objective function of $t$-SNE.
+One can present the pairwise constraints in form of \emph{semantic similarity}~\citep{logeswaran2018efficient}:
 \[
 	\sum_{x, x^+, x^-} \Big[
 		- \log \frac{\exp \big(f(x)^T f(x^+) \big)}
@@ -114,7 +115,7 @@ The following regularization term, aka. \emph{triplet loss}~\citep{schroff2015fa
 	\sum_{x, x^+, x^-} \Big( ||f(x) - f(x^+) ||^2 - || f(x) - f(x^-) ||^2 + margin \Big)
 \]
 
-\subsection{How to Find the Perplexity of $t$-SNE Automatically?}
+\subsection{How to Find the Perplexity of $t$-SNE Automatically?}\label{sec:tsne:bo}
 As presented above, we have tried to use the user defined constraints on the similarity/dissimilarity of data points as a criterion to find the best visualization.
 But this approach has a big drawback in its scalability.
 We need to heuristically search through all precalculated embeddings to find the best one that maximizes the constraint preserving score.
@@ -129,18 +130,18 @@ The core element in BayesOpt is \emph{Gaussian Process} model, which will be det
 
 
 \section{Research Topics on Probabilistic DR}\label{sec:work}
-As described above, our current approach is to incorporate the user constraints into some basic DR methods.
+As described above, our current approach is to incorporate the user constraints into some basic DR methods in form of regularization term.
 An inconvenience with this approach is that, we have to find different forms for the regularization term to represent different types of constraints for different basic DR methods.
 Inspired by the Bayesian visual analytics (\emph{BaVA}) framework~\underline{\citep{house2015bayesian}} and the model-based approach~\citep{bishop2013model}, we would like to create an unified framework for modeling the users' feedback for the probabilistic DR methods.
 The model-based approach separates the model (how we represent our problem) and the algorithm (how we fit the model with the observed data to infer the latent structures that we desire to find).
-Taking advantages of the recent powerful probabilistic programming toolbox (like Stan\footnote{https://mc-stan.org/}, Pyro\footnote{http://pyro.ai/} or TensorFlow Probability\footnote{https://www.tensorflow.org/probability}), we thus do not have to worry about the inference problem.
+Taking advantages of the recent powerful probabilistic programming toolboxes (like Stan\footnote{https://mc-stan.org/}, Pyro\footnote{http://pyro.ai/} or TensorFlow Probability\footnote{https://www.tensorflow.org/probability}), we thus do not have to worry about the inference problem.
 In fact it still takes time to make the inference procedure work in practice, but our main research problem is now focused on how to model the users' feedback in a probabilistic framework.
-\underline{\citep{lawrence2005probabilistic}} reviews several probabilistic DR methods including density network, generative topographic mapping, PPCA and relates them to popular spectral techniques such as kernel PCA and multidimensional scaling. (This is a key paper to start with).
+\underline{\citep{lawrence2005probabilistic}} reviews several probabilistic DR methods including density network, generative topographic mapping, PPCA and relates them to popular spectral techniques such as kernel PCA and multidimensional scaling. This is a key paper to start with.
 We then plan to work with two latent variables models families: \emph{gaussian process latent variable models} (Section~\ref{sec:gp}) and \emph{auto-encoding variational bayes} (Section~\ref{sec:nn}).
 The idea and motivation for this approach will be detailed in the following sections.
 
 
-\subsection{Using \emph{Gaussian Processes} for Modeling the User's Feedbacks}\label{sec:gp}
+\subsection{Using Gaussian Processes for Modeling the User's Feedback}\label{sec:gp}
 We have proposed a simple idea of integrating the users' feedback on the position of points in the visualization into PPCA model.
 This model can be improved by making it more complex (e.g., mixture of PPCA\citep{tipping1999mixtures}) or making it richer (e.g., using \emph{Gaussian process}~\citep{rasmussen2005gp} to model the latent variables).
 For the first idea with the mixture model, the users can give their feedback about the group of the interacted points, e.g., which points should be in the same or in different groups.
@@ -161,8 +162,9 @@ More specifically, our research question is how to present the constraints of in
 \subsection{Interactive Visualization in (Deep) Neural Network Model}\label{sec:nn}
 The classical probabilistic models like PPCA or GP-LVM have an issue of not scaling well for the large dataset.
 Even though these models are flexible (e.g., one can choose a periodic kernel for GP-LVM to work with periodic time-series data), we still need a more powerful model to work directly with the more complex data like image or text.
-Variational Auto-encoder (\emph{VAE})~\underline{\citep{kingma2013auto}} leverages the deep neural network for learning the representation features and has several advantages.
-The auto-encoder network can be modeled as a probabilistic model and the inference problem is solved efficiently by a stochastic variational approach (which converts an inference problem to an optimization problem and solves it approximately by a gradient-based method).
+Variational Auto-encoder (\emph{VAE})~\underline{\citep{kingma2013auto}} leverages the deep neural network for learning the representation features.
+The auto-encoder network can be modeled as a probabilistic model and the inference problem is solved efficiently by a stochastic variational approach
+(which converts an inference problem to an optimization problem and solves it by a gradient-based method).
 That gives us enough flexibility to choose the network architecture and makes this model work with large dataset.
 
 VAE does not only learn the latent representation of the data but also generate the new realistic samples.
