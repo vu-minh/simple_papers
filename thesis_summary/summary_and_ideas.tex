@@ -13,6 +13,8 @@
 \bibliographystyle{abbrvnat}
 \setcitestyle{authoryear,open={(},close={)}}
 
+\usepackage[para]{footmisc}
+
 % for landscape and long table
 \usepackage{longtable}
 \usepackage{pdflscape}
@@ -155,11 +157,18 @@ We would like to use this covariance function to also encodes the user constrain
 With this idea, we can model observation-level interaction~\citep{endert2011observation} into GP-LVM model.
 More specifically, our research question is how to present the constraints of individual observations (fixed position of anchor points, pairwise constraints or constraints on group of points, etc.) by a covariance function of the Gaussian process models? 
 
-\subsection{Interactive Visualization in Deep Learning Model}\label{sec:nn}
-+ distilpub cite visualize features
-+ viz pre-learned model (ICLR)
-+ VAE~\underline{\citep{kingma2013auto}}
-+ Semisupervised VAE~\citep{kingma2014semi}
+\subsection{Interactive Visualization in (Deep) Neural Network Model}\label{sec:nn}
+The classical probabilistic models like PPCA or GP-LVM have an issue to not scale well for the large dataset.
+Even though these models are flexible (e.g., we can choose a periodic kernel for GP-LVM to work with periodic time-series data), we still need a more powerful model to work directly with the more complex data like image or text.
+Variational Auto-encoder (\emph{VAE})~\underline{\citep{kingma2013auto}} leverages the deep neural network for learning the representation features and has several advantages.
+The auto-encoder network can be modeled as a probabilistic model and the inference problem is solved efficiently by a stochastic variational approach (which converts an inference problem to an optimization problem and solves it approximately by a gradient-based method).
+That gives us enough flexibility to choose the network architecture and makes this model work with large dataset.
+
+VAE does not only learn the latent representation of the data but also generate the new realistic samples.
+Taking the ideas of semi-supervised VAE~\citep{kingma2014semi} or Conditional VAE~\citep{sohn2015learning}, we can see a possible usage of the user's interaction to control the structure of the latent representation or the generated samples.
+If the user can modify the value of the latent features and see the change in the corresponding generated sample, he can gain knowledge about the meaning of the latent features.
+Towards the interpretability of the generative model, one can visualize the learned features in each layer of the network to understand the contribution of the latent features to the output generated sample.
+The guideline for this research direction is a collection of interactive articles on \emph{Feature Visualization}~\underline{\citep{olah2017feature}} and \emph{The Building Blocks of Interpretability}~\underline{\citep{olah2018the}} in the \emph{Distill} journal.
 
 
 \medskip
