@@ -86,15 +86,15 @@ In that way, the user can control the positions of some anchor points in order t
 
 
 \section{On Going Works with $t$-SNE}\label{sec:tsne}
-\subsection{Integrating pairwise constraints to $t$-SNE}
-The advantage of $t$-SNE is to preserve local structures and also global structure of the data.
+\subsection{Integrating pairwise constraints into $t$-SNE}
+The advantage of $t$-SNE is to preserve the local structures and also the global structure of the data.
 Conceptually, we can say a visualization is easy to understand if we can see clearly the groups in it.
 However, as pointed out in \emph{how to use $t$-SNE effectively}~\citep{wattenberg2016how}
-% , one of the major difficulties when applying $t$-SNE is how to connect the intuition about the data in high dimensional space to its representation in 2-dimensional space. More specifically, 
-``cluster sizes in a $t$-SNE plot mean nothing'' and ``distances between clusters might not mean anything''.
+% , one of the major difficulties when applying $t$-SNE is how to connect the intuition about the data in high dimensional space to its representation in 2-dimensional space. More specifically 
+, ``cluster sizes in a $t$-SNE plot mean nothing'' and ``distances between clusters might not mean anything''.
 That means the within-cluster distances and between-clusters distances are not well preserved in the $t$-SNE embeddings.
 
-A question can be raised: do we need a $t$-SNE embedding that reflects well the size of groups and relative distances between groups?
+A question can be raised: do we need a $t$-SNE embedding that reflects well the size of groups and the relative distances between groups?
 If yes, can we use the pairwise constraints between similar and dissimilar data points in high dimensional space to guide $t$-SNE to overcome the above drawback? 
 A common approach to integrate the constraints is to represent them as a regularization term to be jointly optimized with the original objective function of $t$-SNE.
 One can present the pairwise constraints in a simple form of \emph{semantic similarity}~\citep{logeswaran2018efficient}:
@@ -104,7 +104,7 @@ One can present the pairwise constraints in a simple form of \emph{semantic simi
 		{\exp \big(f(x)^T f(x^+) \big) + \exp \big(f(x)^T f(x^-) \big)}
 	\Big],
 \]
-where $f(x)$ is a representation function of a sample $x$, (can simply be a learned embedding of $t$-SNE),
+where $f(x)$ is a representation function of a sample $x$ (can simply be a learned embedding of $t$-SNE),
 $x^+$ and $x^-$ are the corresponding \emph{positive} and \emph{negative} samples of $x$ (can be easily selected by the user).
 We can also experiment with another form of semantic similarity which is introduced in a recent theoretical analysis of \emph{contrastive} unsupervised representation learning~\citep{arora2019theoretical}.
 Another way is to use \emph{triplet} constraints $(x,x^+,x^-)$ to represent $x$ is closer to $x^+$ than to $x^-$.
@@ -133,14 +133,14 @@ An inconvenience with this approach is that, we have to find different forms for
 Inspired by the Bayesian visual analytics (\emph{BaVA}) framework~\underline{\citep{house2015bayesian}} and the model-based approach~\citep{bishop2013model}, we would like to create an unified framework for modeling the users' feedback for the probabilistic DR methods.
 The model-based approach separates the model (how we represent our problem) and the algorithm (how we fit the model with the observed data to infer the latent structures that we desire to find).
 Taking advantages of the recent powerful probabilistic programming toolbox (like Stan\footnote{https://mc-stan.org/}, Pyro\footnote{http://pyro.ai/} or TensorFlow Probability\footnote{https://www.tensorflow.org/probability}), we thus do not have to worry about the inference problem.
-In fact it still takes time to make the inference procedure work in practice, but our main research problem is now focused on how to model the users' feedback in a probabilistic framework.
+In fact it still takes time to make the inference procedure work in practice, but our main research problem is now how to model the users' feedback in a probabilistic framework.
 \underline{\citep{lawrence2005probabilistic}} reviews several probabilistic DR methods including density network, generative topographic mapping, PPCA and relates them to popular spectral techniques such as kernel PCA and multidimensional scaling. (This is a key paper to start with).
 We then plan to work with two latent variables models families: \emph{gaussian process latent variable models} (Section~\ref{sec:gp}) and \emph{auto-encoding variational bayes} (Section~\ref{sec:nn}).
 The idea and motivation for this approach will be detailed in the following sections.
 
 
 \subsection{Using \emph{Gaussian Processes} for Modeling the User's Feedbacks}\label{sec:gp}
-We have proposed a simple idea of integrating the users' feedback on the position of points in the visualization into PPCA model.
+We have proposed an idea of integrating the users' feedback on the position of points in the visualization into PPCA model.
 This model can be improved by making it more complex (e.g., mixture of PPCA\citep{tipping1999mixtures}) or making it richer (e.g., using \emph{Gaussian process}~\citep{rasmussen2005gp} to model the latent variables).
 For the first idea with the mixture model, the users can give their feedback about the group of the interacted points, e.g., which points should be in the same or in different groups.
 This type of feedback can be used to create the visualization with semantic clustering in which the clusters respect the requirements of the user instead of the annotated class labels.
@@ -148,14 +148,14 @@ This type of feedback can be used to create the visualization with semantic clus
 The second idea of using Gaussian process is more potential.
 A Gaussian process, roughly speaking, is a collection of random variables, any finite number of which have joint Gaussian distributions.
 It is usually used as a distribution over functions.
-In PPCA model, the data is described by generative process, which is indeed a mapping function from a latent space to the observed data space.
+In PPCA model, the data is described by a generative process, which is indeed a mapping function from a latent space to the observed data space.
 Gaussian Process Latent Variable Models (GP-LVM)~\underline{\citep{lawrence2004gaussian}} defines a particular Gaussian process prior on this mapping function in order to learn a more general non-linear mapping function for the data.
 
 Moreover, when the user interacts with points in the visualization, the covariance function can be used to explain how the selected points and all other non-touched points are correlated to each other.
 In the Gaussian process model, the covariance function encodes all assumptions about the form of the mapping function that describes the data.
-We would like to use this covariance function to also encodes the user constraints.
-With this idea, we can model observation-level interaction~\citep{endert2011observation} into GP-LVM model.
-More specifically, our research question is how to present the constraints of individual observations (fixed position of anchor points, pairwise constraints or constraints on group of points, etc.) by a covariance function of the Gaussian process models? 
+We would like to use this covariance function to also encode the user constraints.
+With this idea, we can model the observation-level interaction~\citep{endert2011observation} into GP-LVM model.
+More specifically, our research question is how to present the constraints of the individual observations (fixed position of anchor points, pairwise constraints or constraints on group of points, etc.) by a covariance function of the Gaussian process models? 
 
 \subsection{Interactive Visualization in (Deep) Neural Network Model}\label{sec:nn}
 The classical probabilistic models like PPCA or GP-LVM have an issue to not scale well for the large dataset.
